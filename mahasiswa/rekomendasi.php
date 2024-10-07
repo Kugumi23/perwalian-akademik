@@ -39,7 +39,7 @@
                 </ul>
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                        <a href="#" class="nav-link active">Data Konsultasi & Janji Temu</a>
+                        <a href="#" class="nav-link active">Rekomendasi</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex flex-row ms-auto">

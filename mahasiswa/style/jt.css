@@ -7,3 +7,6 @@
     border-radius: 6px;
     border: 2px solid lightgray;
 }
+.i-left {
+    justify-content: left;
+}

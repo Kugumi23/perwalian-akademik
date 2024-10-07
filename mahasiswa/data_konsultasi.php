@@ -94,7 +94,7 @@
                         <label for="textarea" form="form-label">Materi/Keterangan :</label>
                         <textarea name="textarea" class="form-control" id="textarea" style="height: 200px;"></textarea>
                     </div>
-                    <div class="container d-flex">
+                    <div class="container d-flex justify-content-left">
                         <button type="submit" class="btn btn-success me-2"><i class="bi bi-save ms-4 me-4"></i></button>
                         <button type="reset" class="btn btn-danger"><i class="bi bi-trash ms-4 me-4"></i></button>
                     </div>

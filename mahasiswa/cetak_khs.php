@@ -25,7 +25,7 @@
             <a href="beranda.php" class="nav-link pt-3 pb-3">Beranda</a> 
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi & Janji Temu</a>
             <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Cetak KHS</a>
-            <a href="#" class="nav-link pt-3 pb-3">Rekomendasi</a>
+            <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
         </div>
     </div>
     <div class="container-fluid" style="margin-bottom:70px;">    

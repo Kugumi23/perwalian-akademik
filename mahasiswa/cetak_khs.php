@@ -7,7 +7,7 @@
     <title>BSPAM Online : Cetak KHS</title>
     <link rel="stylesheet" href="style/khs.css">
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background-image:url('picture/bg_main.jpg');
@@ -119,6 +119,6 @@
         </ul>
     </div>
     <br>
-    <script src="vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

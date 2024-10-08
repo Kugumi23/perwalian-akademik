@@ -59,7 +59,7 @@
             </nav>
         </div>
         <!-- Batas navigation-bar -->
-        <div class="container-fluid pt-4 jt-body">
+        <div class="container-fluid pt-5 jt-body">
             <h4 class="ps-3">Jadwal Konsultasi Mahasiswa</h4>
             <div class="container-fluid pt-4">
                 <p class="text-warning">Perhatian : Anda dapat mengajukan janji temu yang nantinya akan ditampilkan di dalam <b>Jadwal Konsultasi Mahasiswa</b>, proses ini melibatkan mahasiswa dan dosen pembimbing dimana tidak semua janji temu akan masuk ke tabel jadwal atau bila tidak setujui oleh dosen pembimbing</p>

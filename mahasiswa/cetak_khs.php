@@ -59,66 +59,67 @@
         </nav>
     </div>
     <!-- Batas navigation-bar -->
-    <div class="container sides2 shadow">
-        <h2>Surat Keterangan Hasil Studi : Semester 1</h2><br>
-        <ul class="nav">
-            <li class="nav-item">
-                <i class="bi bi-download"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr1.pdf</a>
-            </li>
-        </ul>
+     <div class="container-fluid pt-5 pb-3">
+        <div class="container sides2 shadow">
+            <h2>Surat Keterangan Hasil Studi : Semester 1</h2><br>
+            <ul class="nav">
+                <li class="nav-item">
+                    <i class="bi bi-download"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr1.pdf</a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="container sides2 shadow">
+            <h2>Surat Keterangan Hasil Studi : Semester 2</h2><br>
+            <ul class="nav">
+                <li class="nav-item">
+                    <i class="bi bi-download"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr2.pdf</a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="container sides2 shadow">
+            <h2>Surat Keterangan Hasil Studi : Semester 3</h2><br>
+            <ul class="nav">
+                <li class="nav-item">
+                    <i class="bi bi-download"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr3.pdf</a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="container sides2 shadow">
+            <h2>Surat Keterangan Hasil Studi : Semester 4</h2><br>
+            <ul class="nav">
+                <li class="nav-item">
+                    <i class="bi bi-download"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr4.pdf</a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <div class="container sides2 shadow">
+            <h2>Surat Keterangan Hasil Studi : Semester 5</h2><br>
+            <ul class="nav">
+                <li class="nav-item">
+                    <i class="bi bi-download"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr5.pdf</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <br>
-    <div class="container sides2 shadow">
-        <h2>Surat Keterangan Hasil Studi : Semester 2</h2><br>
-        <ul class="nav">
-            <li class="nav-item">
-                <i class="bi bi-download"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr2.pdf</a>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <div class="container sides2 shadow">
-        <h2>Surat Keterangan Hasil Studi : Semester 3</h2><br>
-        <ul class="nav">
-            <li class="nav-item">
-                <i class="bi bi-download"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr3.pdf</a>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <div class="container sides2 shadow">
-        <h2>Surat Keterangan Hasil Studi : Semester 4</h2><br>
-        <ul class="nav">
-            <li class="nav-item">
-                <i class="bi bi-download"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr4.pdf</a>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <div class="container sides2 shadow">
-        <h2>Surat Keterangan Hasil Studi : Semester 5</h2><br>
-        <ul class="nav">
-            <li class="nav-item">
-                <i class="bi bi-download"></i>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Surat_keterangan_hasil_studi_smstr5.pdf</a>
-            </li>
-        </ul>
-    </div>
-    <br>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

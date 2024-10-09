@@ -16,7 +16,7 @@ p {
     text-align:center;
 }
 .nav-link {
-    border-radius:6px;
+    border-radius: 6px;
 }
 .activated {
     background-color:maroon;

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
-    <title>BSPAM Online : Data Mahasiswa</title>
+    <title>BSPAM Online : Konsultasi</title>
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/dm.css">
-    <link rel="stylesheet" href="../vendor/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style/dk.css">
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background-image:url('picture/bg_main.jpg');
@@ -16,14 +16,14 @@
 </head>
 <body>
     <!-- Menu sidebar -->
-     <div class="offcanvas offcanvas-start" id="canvas">
+    <div class="offcanvas offcanvas-start" id="canvas">
         <div class="offcanvas-header text-bg-dark">
             <h4 class="canva-title pt-2">Dashboard</h4>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
-            <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Data Mahasiswa</a>
-            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
+            <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
+            <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi</a>
             <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
      </div>
@@ -40,7 +40,7 @@
                  </ul>
                  <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">Data Mahasiswa</a>
+                        <a href="#" class="nav-link active">Data Konsultasi</a>
                     </li>
                  </ul>
                  <ul class="navbar-nav flex-row d-flex ms-auto">
@@ -59,29 +59,9 @@
         </nav>
     </div>
     <!-- Batas Navigation-Bar -->
-    <div class="container-fluid pt-5 dm-body">
-        <div class="container-fluid pt-5">
-            <h4>Data Mahasiswa</h4>
-            <table class="table table-striped">
-                <thead class="table-danger">
-                    <tr>
-                        <th>NIM</th>
-                        <th>Nama Mahasiswa</th>
-                        <th>Jenis Kelamin</th>
-                        <th>No. Telp</th>
-                        <th>Semester</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>3202216000</td>
-                        <td>Mahasiswa 1</td>
-                        <td>Laki-Laki</td>
-                        <td>1234567890</td>
-                        <td>5</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container-fluid pt-5 dk-body">
+        <div class="container-fluid pt-4">
+            <h4>Jadwal Konsultasi Mahasiswa</h4>
         </div>
     </div>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

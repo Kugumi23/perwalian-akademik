@@ -12,6 +12,12 @@
         body {
             background-image:url('picture/bg_main.jpg');
         }
+        .dk-body {
+            padding-left:60px;
+            padding-right:60px;
+            justify-content:left;
+        }
+
     </style>
 </head>
 <body>
@@ -60,8 +66,40 @@
     </div>
     <!-- Batas Navigation-Bar -->
     <div class="container-fluid pt-5 dk-body">
-        <div class="container-fluid pt-4">
-            <h4>Jadwal Konsultasi Mahasiswa</h4>
+        <div class="container-fluid pt-5">
+            <div class="container-fluid d-flex pb-2">
+                <h4>Jadwal Konsultasi Mahasiswa</h4>
+                <button type="button" class="btn btn-success shadow ms-auto">
+                    <a href="janji_temu.php" class="nav-link text-light"><i class="bi bi-plus me-1"></i>Buat Janji</a>
+                </button>
+                <button type="button" class="btn btn-primary shadow ms-2">
+                    <a href="p_janji_temu.php" class="nav-link text-light"><i class="bi bi-book me-2"></i>Permintaan janji temu</a>
+                </button>
+            </div>
+            <table class="table table-striped">
+                <thead class="table-danger">
+                    <tr>
+                        <th>No</th>
+                        <th>NIM</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>Kelas</th>
+                        <th>Semester</th>
+                        <th>Tanggal Konsultasi</th>
+                        <th>Materi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>3202216000</td>
+                        <td>Mahasiswa 1</td>
+                        <td>C</td>
+                        <td>5</td>
+                        <td>04/06/2025</td>
+                        <td>Normalisasi data base</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

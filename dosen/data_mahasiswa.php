@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <title>BSPAM Online : Data Mahasiswa</title>
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/dm.css">
-    <link rel="stylesheet" href="../vendor/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background-image:url('picture/bg_main.jpg');
+        }
+        .dm-body {
+            padding-left:60px;
+            padding-right:60px;
+            justify-content:left;
         }
     </style>
 </head>
@@ -61,7 +65,15 @@
     <!-- Batas Navigation-Bar -->
     <div class="container-fluid pt-5 dm-body">
         <div class="container-fluid pt-5">
-            <h4>Data Mahasiswa</h4>
+            <div class="container-fluid d-flex">
+                <h4>Data Mahasiswa</h4>
+                <form action="#" class="ms-auto">
+                    <div class="container-fluid d-flex pb-2">
+                        <input type="text" class="form-control" placeholder="cari" style="height:32px;">
+                        <button type="submit" class="btn btn-primary ms-1" name="submit" value="submit" style="height:32px;"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
             <table class="table table-striped">
                 <thead class="table-danger">
                     <tr>

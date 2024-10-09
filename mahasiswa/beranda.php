@@ -38,7 +38,7 @@
                     </button>
                 </ul>
                 <ul class="navbar-nav">
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a href="#" class="nav-link active">Beranda</a>
                     </li>
                 </ul>

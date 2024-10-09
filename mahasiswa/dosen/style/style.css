@@ -1,0 +1,20 @@
+body {
+    font-family: Times new roman;
+    background-size:cover;
+    background-position:cover;
+    background-repeat:no-repeat;
+}
+.navbar{
+    background-color:maroon;
+}
+p {
+    font-size:18px;
+}
+.sides {
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+.activated {
+    background-color:maroon;
+}

@@ -10,29 +10,33 @@
     <link rel="stylesheet" href="../vendor/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
-            font-family: Times new roman;
+            background-image:url('picture/bg_main.jpg');
         }
     </style>
 </head>
 <body>
     <!-- Menu sidebar -->
      <div class="offcanvas offcanvas-start" id="canvas">
-        <h4 class="offcanvas-header text-bg-dark">Dashboard</h4>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        <div class="offcanvas-header text-bg-dark">
+        <h4 class="canva-title pt-2">Dashboard</h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body sidebar-content">
+            <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Data Mahasiswa</a>
+            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
+            <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
+            <a href="distriusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
      </div>
-     <div class="offcanvas-body sidebar-content">
-        <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Data Mahasiswa</a>
-        <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
-        <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
-        <a href="distriusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
-     </div>
+    </div>
     <!-- Navigation-bar laman -->
     <div class="container-fluid" style="margin-botto:70px">
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container-fluid">
                 <!-- Bagian Sidebar -->
                  <ul class="navbar-nav">
-                    <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas"></button>
+                    <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                  </ul>
                  <ul class="navbar-nav">
                     <li class="nav-item">

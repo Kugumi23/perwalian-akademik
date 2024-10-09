@@ -1,8 +1,8 @@
 body {
-    font-family: Times new roman;
     background-size:cover;
     background-position:cover;
     background-repeat:no-repeat;
+    font-family: 'Times New Roman';
 }
 .navbar{
     background-color:maroon;
@@ -10,7 +10,7 @@ body {
 p {
     font-size:18px;
 }
-.sides {
+.sidebar-content {
     justify-content:center;
     align-items:center;
     text-align:center;

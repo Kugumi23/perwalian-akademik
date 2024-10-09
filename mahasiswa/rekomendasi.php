@@ -77,8 +77,8 @@
                     <textarea name="textarea" id="textarea" class="form-control" style="height:200px;"></textarea>
                 </div>
                 <div class="container-fluid d-flex pb-3">
-                    <button type="submit" class="btn btn-success me-2"><i class="bi bi-save"></i></button>
-                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    <button type="submit" class="btn btn-success me-2"><i class="bi bi-save me-4 ms-4"></i></button>
+                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-4 ms-4"></i></button>
                 </div>
             </form>
         </div>

@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
-    <title>BSPAM Online : Konsultasi</title>
+    <title>BSPAM Online : Janji Temu</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
-            background-image:url('picture/bg_main.jpg');
+            background-image:url("picture/bg_main.jpg");
         }
-        .dk-body {
+        .pjt-body {
             padding-left:60px;
             padding-right:60px;
         }
-
+        .pjt-form {
+            border-radius:6px;
+            border:2px solid lightgray;
+        }
     </style>
 </head>
 <body>
@@ -27,13 +30,13 @@
         </div>
         <div class="offcanvas-body sides">
             <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
-            <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi</a>
+            <a href="data_konsultasi.php" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi</a>
             <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
      </div>
     </div>
     <!-- Navigation-bar laman -->
-    <div class="container-fluid" style="margin-botto:70px;">
+    <div class="container-fluid" style="margin-bottom:70px;">
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container-fluid">
                 <!-- Bagian Sidebar -->
@@ -44,7 +47,7 @@
                  </ul>
                  <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">Data Konsultasi</a>
+                        <a href="#" class="nav-link active">Data Konsultasi / Janji Temu</a>
                     </li>
                  </ul>
                  <ul class="navbar-nav flex-row d-flex ms-auto">
@@ -63,43 +66,43 @@
         </nav>
     </div>
     <!-- Batas Navigation-Bar -->
-    <div class="container-fluid pt-5 dk-body">
-        <div class="container-fluid pt-5">
-            <div class="container-fluid flex-row d-flex pb-2">
-                <h4>Jadwal Konsultasi Mahasiswa</h4>
-                <button type="button" class="btn btn-success shadow ms-auto">
-                    <a href="janji_temu.php" class="nav-link text-light"><i class="bi bi-plus me-1"></i>Buat Janji</a>
-                </button>
-                <button type="button" class="btn btn-primary shadow ms-2">
-                    <a href="p_janji_temu.php" class="nav-link text-light"><i class="bi bi-book me-2"></i>Permintaan janji temu</a>
-                </button>
+     <div class="container-fluid pt-5 pjt-body">
+        <h4 class="pb-2"><i class="bi bi-book me-2"></i>Form Janji Temu</h4>
+        <div class="container-fluid p-4 bg-light shadow pjt-form">
+            <form action="" class="row mb-5 mt-3">
+                <div class="col-md-1 d-flex align-items-center">
+                    <label for="nama" class="form-lable">Nama</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="nama mahasiswa">
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <label for="date" class="form-lable">Tgl Konsul</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="datetime" class="form-control" name="date" id="date">
+                </div>
+            </form>
+            <form action="" class="row mb-3 formulir">
+                <div class="col-md-1 d-flex align-items-center">
+                    <label for="nim" class="form-lable">NIM</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="nim" id="nim" placeholder="nim mahasiswa">
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <label for="topic" class="form-lable">Materi</label>
+                </div>
+                <div class="col-md-5">
+                    <input type="datetime" class="form-control" name="topic" id="topic">
+                </div>
+            </form>
+            <div class="container-fluid d-flex flex-row pt-2 justify-content-end mt-3 mb-2">
+                <button type="submit" class="btn btn-success me-2">Simpan<i class="bi bi-save ms-2"></i></button>
+                <button type="reset" class="btn btn-danger">Bersihkan<i class="bi bi-trash ms-2"></i></button>
             </div>
-            <table class="table table-striped">
-                <thead class="table-danger">
-                    <tr>
-                        <th>No</th>
-                        <th>NIM</th>
-                        <th>Nama Mahasiswa</th>
-                        <th>Kelas</th>
-                        <th>Semester</th>
-                        <th>Tanggal Konsultasi</th>
-                        <th>Materi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>3202216000</td>
-                        <td>Mahasiswa 1</td>
-                        <td>C</td>
-                        <td>5</td>
-                        <td>04/06/2025</td>
-                        <td>Normalisasi data base</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-    </div>
-    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+     </div>
+     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

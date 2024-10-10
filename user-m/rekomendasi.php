@@ -17,7 +17,7 @@
 <body>
     <div class="offcanvas offcanvas-start" id="mycanvas">
         <div class="offcanvas-header text-bg-dark">
-            <h4 class="canvas-title pt-2">Dashboard</h4>
+            <h4 class="canvas-title pt-2">Menu</h4>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
@@ -98,7 +98,7 @@
                         <td>12-02-2023</td>
                         <td>
                             <div class="container-fluid p-3 d-flex bg-light file-box">
-                                <h5><i class="bi bi-folder"> <a href="">surat-so.pdf</a></i></h5>
+                                <h5><i class="bi bi-folder"><a href="">surat-so.pdf</a></i></h5>
                             </div>
                         </td>
                     </tr>
@@ -107,7 +107,7 @@
                         <td>20-10-2024</td>
                         <td>
                             <div class="container-fluid p-3 d-flex bg-light file-box">
-                                <h5><i class="bi bi-folder"> <a href="">surat-do.pdf</a></i></h5>
+                                <h5><i class="bi bi-folder"><a href="">surat-do.pdf</a></i></h5>
                             </div>
                         </td>
                     </tr>

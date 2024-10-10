@@ -17,7 +17,7 @@
 <body>
     <div class="offcanvas offcanvas-start" id="mycanvas">
         <div class="offcanvas-header text-bg-dark">
-            <h4 class="canvas-title pt-2">Dashboard</h4>
+            <h4 class="canvas-title pt-2">Menu</h4>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">

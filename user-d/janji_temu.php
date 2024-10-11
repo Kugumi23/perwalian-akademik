@@ -69,32 +69,34 @@
      <div class="container-fluid pt-5 jt-body">
         <h4 class="pb-2"><i class="bi bi-book me-2"></i>Form Janji Temu</h4>
         <div class="container-fluid p-4 bg-light shadow jt-form">
-            <form action="" class="row mb-5 mt-3">
-                <div class="col-md-1 d-flex align-items-center">
-                    <label for="nama" class="form-lable">Nama</label>
+            <form action="" method="post">
+                <div class="row mb-3 mt-4">
+                    <div class="col-6">
+                        <div class="input-group">
+                            <span class="input-group-text">Nama</span>
+                            <input type="text" class="form-control" name="nama">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <span class="input-group-text">Tgl Konsul</span>
+                            <input type="datetime-local" name="datetime" id="datetime" class="form-control">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="nama mahasiswa">
-                </div>
-                <div class="col-md-1 d-flex align-items-center">
-                    <label for="date" class="form-lable">Tgl Konsul</label>
-                </div>
-                <div class="col-md-5">
-                    <input type="datetime" class="form-control" name="date" id="date">
-                </div>
-            </form>
-            <form action="" class="row mb-3">
-                <div class="col-md-1 d-flex align-items-center">
-                    <label for="nim" class="form-lable">NIM</label>
-                </div>
-                <div class="col-md-5">
-                    <input type="text" class="form-control" name="nim" id="nim" placeholder="nim mahasiswa">
-                </div>
-                <div class="col-md-1 d-flex align-items-center">
-                    <label for="topic" class="form-lable">Materi</label>
-                </div>
-                <div class="col-md-5">
-                    <input type="datetime" class="form-control" name="topic" id="topic">
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <div class="input-group">
+                            <span class="input-group-text">NIM</span>
+                            <input type="text" class="form-control" name="nim">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <span class="input-group-text">Materi</span>
+                            <input type="text" class="form-control" name="materi">
+                        </div>
+                    </div>
                 </div>
             </form>
             <div class="container-fluid d-flex flex-row pt-2 justify-content-end mt-3 mb-2">

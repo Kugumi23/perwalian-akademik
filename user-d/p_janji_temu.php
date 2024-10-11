@@ -67,7 +67,7 @@
             <h4>Permintaan Janji Temu</h4>
             <form action="" class="d-flex flex-row ms-auto">
                 <input type="text" class="form-control" name="cari" id="cari" palceholder="cari..">
-                <button type="submit" class="btn btn-primary ms-2" value="submit" name="submit"><i class="bi bi-search"></i></button>
+                <button type="submit" class="btn btn-primary ms-2 d-flex justify-content" value="submit" name="submit"><i class="bi bi-search"></i></button>
             </form>
         </div>
         <div class="container-fluid mt-2">
@@ -88,7 +88,30 @@
                         <td>20/01/2024</td>
                         <td>Perbaikan data base</td>
                         <td>
-                            
+                            <form action="" method="post" class="d-flex flex-row">
+                                <div class="me-2">
+                                    <button type="submit" class="btn btn-success" name="acc" <?php echo isset($_POST['acc']) ? 'disabled': ''; ?> <?php echo isset($_POST['den']) ? 'disabled': ''; ?>>
+                                        Setuju
+                                        <?php
+                                            if (isset($_POST['acc'])) {
+                                                
+                                            }
+                                        ?>
+                                        <i class="bi bi-check-circle"></i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-danger" name="den" <?php echo isset($_POST['den']) ? 'disabled': ''; ?> <?php echo isset($_POST['acc']) ? 'disabled': ''; ?>>
+                                        Tolak
+                                        <?php
+                                            if (isset($_POST['den'])) {
+
+                                            }
+                                        ?>
+                                        <i class="bi bi-x-circle"></i>
+                                    </button>
+                                </div>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

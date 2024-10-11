@@ -83,7 +83,7 @@
                     <input type="datetime" class="form-control" name="date" id="date">
                 </div>
             </form>
-            <form action="" class="row mb-3 formulir">
+            <form action="" class="row mb-3">
                 <div class="col-md-1 d-flex align-items-center">
                     <label for="nim" class="form-lable">NIM</label>
                 </div>

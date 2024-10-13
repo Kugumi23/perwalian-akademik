@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
-    <title>BSPAM Online : Upload KHS</title>
-    <link rel="stylesheet" href="../user-m/style/style.css">
-    <link rel="stylesheet" href="../user-d/style/upload_khs.css">
+    <title>BSPAM Online : Distribusi KHS</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/upload_khs.css">
     
 
 
@@ -16,6 +16,11 @@
     body {
         background-image:url('picture/bg_main.jpg');
     }
+    .dk-body {
+            padding-left:60px;
+            padding-right:60px;
+        }
+
 </style>
 <body>
     <div class="offcanvas offcanvas-start" id="mycanvas">
@@ -25,10 +30,13 @@
         </div>
         <div class="offcanvas-body sides">
             <!-- Actived on Beranda -->
-            <a href="#" class="nav-link active active pt-3 pb-3 text-light activated">Beranda</a> 
-            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi & Janji Temu</a>
-            <a href="cetak_khs.php" class="nav-link pt-3 pb-3">Cetak KHS</a>
-            <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
+            <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
+            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
+            <a href="distribusi_khs.php" class="nav-link active pt-3 pb-3 text-light activated">Distribusi KHS</a>
+            <a href="p_janji_temu.php" class="nav-link pt-3 pb-3">Permintaan Janji Temu</a>
+            <a href="janji_temu.php" class="nav-link pt-3 pb-3">Janji Temu</a>
+            <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
+
         </div>
     </div>
     <div class="container-fluid" style="margin-bottom:70px;">    
@@ -43,7 +51,7 @@
                 </ul>
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                        <a href="#" class="nav-link active">Beranda</a>
+                        <a href="#" class="nav-link active">Upload KHS</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex flex-row ms-auto">

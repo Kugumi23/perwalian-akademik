@@ -27,13 +27,15 @@
         </div>
         <div class="offcanvas-body sides">
             <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
-            <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi</a>
-            <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
+            <a href="data_konsultasi.php" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
+            <a href="p_janji_temu.php" class="nav-link pt-3 pb-3">Permintaan Janji Temu</a>
+            <a href="janji_temu.php" class="nav-link pt-3 pb-3">Janji Temu</a>
+            <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
      </div>
     </div>
     <!-- Navigation-bar laman -->
-    <div class="container-fluid" style="margin-botto:70px;">
+    <div class="container-fluid" style="margin-bottom:70px;">
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container-fluid">
                 <!-- Bagian Sidebar -->

@@ -57,7 +57,7 @@
                 <ul class="navbar-nav d-flex flex-row ms-auto">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            Nama_mahasiswa
+                            Nama_dosen
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-right: 2px; margin-left: 3px;" class="rounded-pill">
                         </a>
                         <ul class="dropdown-menu">

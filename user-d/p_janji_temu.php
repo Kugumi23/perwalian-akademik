@@ -25,12 +25,23 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
-        <!-- <a href="#" class="nav-link active active pt-3 pb-3 text-light activated">Beranda</a>  -->
-        <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
+            <div class="container-fluid">
+                <?php
+                    include ("dashboard1.php");
+                    echo "<br>";
+                    include ("dashboard2.php");
+                    echo "<br>";
+                    include ("dashboard3.php");
+                ?>
+            </div>
+            <div class="container-fluid" style="font-size:12px;">
+                <hr>
+                <span>MENU</span>
+                <hr>
+            </div>
+            <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
-            <a href="p_janji_temu.php" class="nav-link active pt-3 pb-3 text-light activated">Permintaan Janji Temu</a>
-            <a href="janji_temu.php" class="nav-link pt-3 pb-3">Janji Temu</a>
             <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
         </div>
     </div>

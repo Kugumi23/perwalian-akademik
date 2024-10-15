@@ -15,7 +15,6 @@
             padding-left:60px;
             padding-right:60px;
         }
-
     </style>
 </head>
 <body>
@@ -26,30 +25,30 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
+            <a href="dashboard.php" class="nav-link pt-3 pb-3">Dashboard</a>
             <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
             <a href="data_konsultasi.php" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
             <a href="p_janji_temu.php" class="nav-link pt-3 pb-3">Permintaan Janji Temu</a>
             <a href="janji_temu.php" class="nav-link pt-3 pb-3">Janji Temu</a>
             <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
-     </div>
+        </div>
     </div>
     <!-- Navigation-bar laman -->
     <div class="container-fluid" style="margin-bottom:70px;">
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container-fluid">
-                <!-- Bagian Sidebar -->
-                 <ul class="navbar-nav">
+                <ul class="navbar-nav">
                     <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                 </ul>
-                 <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="#" class="nav-link active">Data Konsultasi</a>
                     </li>
-                 </ul>
-                 <ul class="navbar-nav flex-row d-flex ms-auto">
+                </ul>
+                <ul class="navbar-nav flex-row d-flex ms-auto">
                     <li class="nav-item dropdown"> 
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                             Nama_dosen
@@ -60,7 +59,7 @@
                             <li><a href="#" class="dropdown-item">Keluar</a></li>
                         </ul>
                     </li>
-                 </ul>
+                </ul>
             </div>
         </nav>
     </div>
@@ -68,7 +67,7 @@
     <div class="container-fluid pt-5 dk-body">
         <div class="container-fluid pt-5">
             <div class="container-fluid flex-row d-flex pb-2">
-                <h4>Jadwal Konsultasi Mahasiswa</h4>
+                <h4>Data Konsultasi Mahasiswa</h4>
                 <button type="button" class="btn btn-success shadow ms-auto">
                     <a href="janji_temu.php" class="nav-link text-light"><i class="bi bi-plus me-1"></i>Buat Janji</a>
                 </button>
@@ -89,15 +88,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>3202216000</td>
-                        <td>Mahasiswa 1</td>
-                        <td>C</td>
-                        <td>5</td>
-                        <td>04/06/2025</td>
-                        <td>Normalisasi data base</td>
-                    </tr>
+                    <?php
+                    // URL API
+                    $api_url = 'http://127.0.0.1:8080/api/konsul'; // Ganti dengan URL API yang sesuai
+
+                    // Mengambil data dari API
+                    $response = file_get_contents($api_url);
+                    $data = json_decode($response, true);
+
+                    // Mengecek apakah data berhasil diambil
+                    if ($data['success']) {
+                        $no = 1; // Untuk nomor urut
+                        foreach ($data['data'] as $item) {
+                            echo "<tr>";
+                            echo "<td>{$no}</td>";
+                            echo "<td>{$item['nim']}</td>";
+                            echo "<td>Mahasiswa {$no}</td>"; // Ganti sesuai data jika ada
+                            echo "<td>C</td>"; // Ganti sesuai data jika ada
+                            echo "<td>5</td>"; // Ganti sesuai data jika ada
+                            echo "<td>" . date('d/m/Y', strtotime($item['tanggal'])) . "</td>"; // Format tanggal
+                            echo "<td>{$item['materi']}</td>";
+                            echo "</tr>";
+                            $no++;
+                        }
+                    } else {
+                        echo "<tr><td colspan='7' class='text-center'>Data tidak ditemukan</td></tr>";
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

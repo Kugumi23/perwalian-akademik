@@ -27,7 +27,7 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
-        <!-- <a href="#" class="nav-link active active pt-3 pb-3 text-light activated">Beranda</a>  -->
+            <a href="dashboard.php" class="nav-link pt-3 pb-3">Dashboard</a>
             <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>

@@ -30,6 +30,7 @@
         </div>
         <div class="offcanvas-body sides">
             <!-- Actived on Beranda -->
+            <a href="dashboard.php" class="nav-link pt-3 pb-3">Dashboard</a>
             <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link active pt-3 pb-3 text-light activated">Distribusi KHS</a>
@@ -51,7 +52,7 @@
                 </ul>
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                        <a href="#" class="nav-link active">Upload KHS</a>
+                        <a href="#" class="nav-link active">Distribusi KHS</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex flex-row ms-auto">

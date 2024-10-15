@@ -62,7 +62,7 @@
                 </ul>
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                        <a href="#" class="nav-link active">Upload KHS</a>
+                        <a href="#" class="nav-link active">Distribusi KHS</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav d-flex flex-row ms-auto">

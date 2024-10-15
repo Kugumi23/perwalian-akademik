@@ -1,16 +1,13 @@
 <html>
 <head>
     <style>
-        .dashboard {
-            align-items:center;
-        }
         .main {
             border-radius:6px;
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid main text-bg-danger pt-3 pb-2 d-flex flex-column justify-content-start align-items-center">
+    <div class="container-fluid main text-bg-danger pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
         <div class="container d-flex flex-row">
             <div>
                 <h2>0</h2>

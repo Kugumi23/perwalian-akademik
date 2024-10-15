@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
-            background-image:url("picture/bg_main.jpg");
+            background-image: url("picture/bg_main.jpg");
         }
         .jt-body {
-            padding-left:60px;
-            padding-right:60px;
+            padding-left: 60px;
+            padding-right: 60px;
         }
         .jt-form {
-            border-radius:6px;
-            border:2px solid lightgray;
+            border-radius: 6px;
+            border: 2px solid lightgray;
         }
     </style>
 </head>
@@ -47,7 +47,7 @@
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
             <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
-     </div>
+        </div>
     </div>
     <!-- Navigation-bar laman -->
     <div class="container-fluid" style="margin-bottom:70px;">
@@ -83,18 +83,18 @@
      <div class="container-fluid pt-5 jt-body">
         <h4 class="pb-2"><i class="bi bi-book me-2"></i>Form Janji Temu</h4>
         <div class="container-fluid p-4 bg-light shadow jt-form">
-            <form action="" method="post">
+            <form id="janjiTemuForm" action="" method="post" onsubmit="return confirmSubmit()">
                 <div class="row mb-3 mt-4">
                     <div class="col-6">
                         <div class="input-group">
                             <span class="input-group-text">Nama</span>
-                            <input type="text" class="form-control" name="nama">
+                            <input type="text" class="form-control" name="nama" required>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="input-group">
                             <span class="input-group-text">Tgl Konsul</span>
-                            <input type="datetime-local" name="datetime" id="datetime" class="form-control">
+                            <input type="datetime-local" name="datetime" id="datetime" class="form-control" required>
                         </div>
                     </div>
                 </div>
@@ -102,23 +102,30 @@
                     <div class="col-6">
                         <div class="input-group">
                             <span class="input-group-text">NIM</span>
-                            <input type="text" class="form-control" name="nim">
+                            <input type="text" class="form-control" name="nim" required>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="input-group">
                             <span class="input-group-text">Materi</span>
-                            <input type="text" class="form-control" name="materi">
+                            <input type="text" class="form-control" name="materi" required>
                         </div>
                     </div>
                 </div>
+                <div class="container-fluid d-flex flex-row pt-2 justify-content-end mt-3 mb-2">
+                    <button type="submit" class="btn btn-success me-2">Simpan<i class="bi bi-save ms-2"></i></button>
+                    <button type="reset" class="btn btn-danger">Bersihkan<i class="bi bi-trash ms-2"></i></button>
+                </div>
             </form>
-            <div class="container-fluid d-flex flex-row pt-2 justify-content-end mt-3 mb-2">
-                <button type="submit" class="btn btn-success me-2">Simpan<i class="bi bi-save ms-2"></i></button>
-                <button type="reset" class="btn btn-danger">Bersihkan<i class="bi bi-trash ms-2"></i></button>
-            </div>
         </div>
      </div>
+
+     <!-- Tambahkan JavaScript untuk konfirmasi -->
+     <script>
+        function confirmSubmit() {
+            return confirm("Apakah Anda yakin ingin menyimpan data ini?");
+        }
+     </script>
      <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

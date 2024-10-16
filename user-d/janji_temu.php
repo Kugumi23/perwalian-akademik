@@ -80,7 +80,10 @@
         </nav>
     </div>
     <!-- Batas Navigation-Bar -->
-     <div class="container-fluid pt-5 jt-body">
+    <div class="ps-3">
+        <button type="submit" class="btn btn-primary shadow"><a href="data_konsultasi.php" class="nav-link"><i class="bi bi-arrow-left-short me-1"></i>Back</a></button>
+    </div>
+     <div class="container-fluid pt-3 jt-body">
         <h4 class="pb-2"><i class="bi bi-book me-2"></i>Form Janji Temu</h4>
         <div class="container-fluid p-4 bg-light shadow jt-form">
             <form id="janjiTemuForm" action="" method="post" onsubmit="return confirmSubmit()">

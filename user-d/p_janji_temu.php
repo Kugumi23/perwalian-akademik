@@ -76,7 +76,10 @@
         </nav>
     </div>
     <!-- Batas Navigation-Bar -->
-    <div class="container-fluid pt-4 pjt-body">
+    <div class="ps-3">
+    <button type="submit" class="btn btn-primary shadow"><a href="data_konsultasi.php" class="nav-link"><i class="bi bi-arrow-left-short me-1"></i>Back</a></button>
+    </div>
+    <div class="container-fluid pt-2 pjt-body">
         <div class="container-fluid d-flex flex-row">
             <h4>Permintaan Janji Temu</h4>
             <form action="" method="post" class="d-flex flex-row ms-auto">

@@ -27,15 +27,25 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
-            <a href="dashboard.php" class="nav-link pt-3 pb-3">Dashboard</a>
+            <div class="container-fluid">
+                <?php
+                    include ("dashboard1.php");
+                    echo "<br>";
+                    include ("dashboard2.php");
+                    echo "<br>";
+                    include ("dashboard3.php");
+                ?>
+            </div>
+            <div class="container-fluid" style="font-size:12px;">
+                <hr>
+                <span>MENU</span>
+                <hr>
+            </div>
             <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
-            <a href="p_janji_temu.php" class="nav-link pt-3 pb-3">Permintaan Janji Temu</a>
-            <a href="janji_temu.php" class="nav-link pt-3 pb-3">Janji Temu</a>
             <a href="permintaan_so.php" class="nav-link active pt-3 pb-3 text-light activated">Permintaan Stop Out</a>
-
-     </div>
+        </div>
     </div>
     <!-- Navigation-bar laman -->
     <div class="container-fluid" style="margin-bottom:70px;">
@@ -69,29 +79,23 @@
     </div>
     <!-- Batas Navigation-Bar -->
     <div class="container-fluid pt-4 pjt-body">
-       
         <div class="container-fluid d-flex flex-row">
             <h4>Permintaan Janji Temu</h4>
             <form action="" class="d-flex flex-row ms-auto">
-                <input type="text" class="form-control" name="cari" id="cari" palceholder="cari..">
-                <button type="submit" class="btn btn-primary ms-2" value="submit" name="submit"><i class="bi bi-search"></i></button>
+                <select class="form-select me-2" name="cell" id="cell">
+                    <option value="Semester 1">Semester 1</option>
+                    <option value="Semester 2">Semester 2</option>
+                    <option value="Semester 3">Semester 3</option>
+                    <option value="Semester 4">Semester 4</option>
+                    <option value="Semester 5">Semester 5</option>
+                    <option value="Semester 6">Semester 6</option>
+                </select>
+                <div class="input-group">
+                    <input type="search" name="cari" id="cari" class="form-control" placeholder="cari nama mahasiswa">
+                    <button type="submit" class="btn btn-primary" name="pencarian"><i class="bi bi-search"></i></button>
+                </div>
             </form>
         </div>
-
-        <div class="container-fluid d-flex flex-row mt-2">
-            <select name="semester" id="semester" class="me-2">
-                <option value="1">Semester 1</option>
-                <option value="2">Semester 2</option>
-                <option value="3">Semester 3</option>
-            </select>
-            <select name="angkatan" id="angkatan">
-                <option value="1">2022</option>
-                <option value="2">2023</option>
-                <option value="3">2024</option>
-            </select>
-        </div>
-
-
         <div class="container-fluid mt-2">
             <table class="table table-striped">
                 <thead class="table-danger">
@@ -104,7 +108,6 @@
                         <th>Semester</th>
                         <th>Alasan</th>
                         <th>Status</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -115,14 +118,15 @@
                         <td>20/01/2024</td>
                         <td>2022</td>
                         <td>5</td>
-                        <td>Banyak penyakit</td>
+                        <td>Cuti Kuliah</td>
                         <td>
-                            <select name="status" id="status" class = "status">
-                                <option value="1" class = "hijau">Disetujui</option>
-                                <option value="2" class = "merah">Ditolak</option>
-                            </select>
-                        </td>
-                            
+                            <form action="" method="post" class="d-flex flex-row">
+                                <div class="me-2">
+                                    <button class="btn btn-warning" type="submit" name="acc">
+                                        <a href="laman-validasi-so.php" class="nav-link">Validasi</a>
+                                    </button>
+                                </div>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

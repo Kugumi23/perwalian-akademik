@@ -1,6 +1,4 @@
-
-
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,29 +17,40 @@
         }
     </style>
 </head>
-<body>
-    <!-- Menu sidebar -->
-     <div class="offcanvas offcanvas-start" id="canvas">
+<body> -->
+<!-- Menu sidebar -->
+<!-- <div class="offcanvas offcanvas-start" id="canvas">
         <div class="offcanvas-header text-bg-dark">
             <h4 class="canva-title pt-2">Dashboard</h4>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
-            <a href="dashboard.php" class="nav-link pt-3 pb-3">Dashboard</a>
+            <div class="container-fluid">
+                <?php
+                include("dashboard1.php");
+                echo "<br>";
+                include("dashboard2.php");
+                echo "<br>";
+                include("dashboard3.php");
+                ?>
+            </div>
+            <div class="container-fluid" style="font-size:12px;">
+                <hr>
+                <span>MENU</span>
+                <hr>
+            </div>
             <a href="data_mahasiswa.php" class="nav-link active pt-3 pb-3 text-light activated">Data Mahasiswa</a>
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
             <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
-            <a href="p_janji_temu.php" class="nav-link pt-3 pb-3">Permintaan Janji Temu</a>
-            <a href="janji_temu.php" class="nav-link pt-3 pb-3">Janji Temu</a>
             <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
-     </div>
-    </div>
-    <!-- Navigation-bar laman -->
-    <div class="container-fluid" style="margin-bottom:70px;">
+        </div>
+    </div> -->
+<!-- Navigation-bar laman -->
+<!-- <div class="container-fluid" style="margin-bottom:70px;">
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
-            <div class="container-fluid">
-                <!-- Bagian Sidebar -->
-                 <ul class="navbar-nav">
+            <div class="container-fluid"> -->
+<!-- Bagian Sidebar -->
+<!-- <ul class="navbar-nav">
                     <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -65,9 +74,9 @@
                  </ul>
             </div>
         </nav>
-    </div>
-    <!-- Batas Navigation-Bar -->
-    <div class="container-fluid pt-5 dm-body">
+    </div> -->
+<!-- Batas Navigation-Bar -->
+<!-- <div class="container-fluid pt-5 dm-body">
         <div class="container-fluid pt-5">
             <div class="container-fluid d-flex flex-row">
                 <h4>Data Mahasiswa Bimbingan</h4>
@@ -102,4 +111,104 @@
     </div>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+</html> -->
+
+<?php
+// Konfigurasi koneksi ke database
+$servername = "localhost"; // Atau server database Anda
+$username = "root"; // Username database
+$password = ""; // Password database
+$dbname = "db_apiteam"; // Nama database yang digunakan
+
+// Membuat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// Query SQL untuk mengambil data mahasiswa
+$sql = "SELECT nim, nama, no_hp, semester FROM mahasiswa";
+$result = $conn->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
+    <title>BSPAM Online : Data Mahasiswa</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-image: url('picture/bg_main.jpg');
+        }
+
+        .dm-body {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Menu sidebar -->
+    <!-- (Kode sidebar dan navbar lainnya) -->
+
+    <!-- Bagian utama halaman -->
+    <div class="container-fluid pt-5 dm-body">
+        <div class="container-fluid pt-5">
+            <div class="container-fluid d-flex flex-row">
+                <h4>Data Mahasiswa Bimbingan</h4>
+                <form action="#" class="ms-auto">
+                    <div class="d-flex pb-2">
+                        <input type="text" class="form-control" placeholder="cari" style="height:32px;">
+                        <button type="submit" class="btn btn-primary ms-1 shadow" name="submit" value="submit" style="height:32px;"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <table class="table table-striped">
+                <thead class="table-danger">
+                    <tr>
+                        <th>NIM</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>Jenis Kelamin</th>
+                        <th>No. Telp</th>
+                        <th>Semester</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Cek apakah data ada
+                    if ($result->num_rows > 0) {
+                        // Looping data mahasiswa
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["nim"] . "</td>";
+                            echo "<td>" . $row["nama"] . "</td>";
+                            // echo "<td>" . $row["jenis_kelamin"] . "</td>";
+                            echo "<td>" . $row["no_hp"] . "</td>";
+                            echo "<td>" . $row["semester"] . "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>Tidak ada data</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
+
+<?php
+// Tutup koneksi
+$conn->close();
+?>

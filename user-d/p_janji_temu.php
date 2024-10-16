@@ -77,7 +77,7 @@
     </div>
     <!-- Batas Navigation-Bar -->
     <div class="ps-3">
-    <button type="submit" class="btn btn-primary shadow"><a href="data_konsultasi.php" class="nav-link"><i class="bi bi-arrow-left-short me-1"></i>Back</a></button>
+        <button type="submit" class="btn btn-primary shadow"><a href="data_konsultasi.php" class="nav-link"><i class="bi bi-arrow-left-short me-1"></i>Back</a></button>
     </div>
     <div class="container-fluid pt-2 pjt-body">
         <div class="container-fluid d-flex flex-row">

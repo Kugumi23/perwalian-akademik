@@ -1,10 +1,6 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +11,11 @@
     <link rel="stylesheet" href="style/rk.css">
     <style>
         body {
-            background-image:url("picture/bg_main.jpg")
+            background-image: url("picture/bg_main.jpg")
         }
     </style>
 </head>
+
 <body>
     <div class="offcanvas offcanvas-start" id="mycanvas">
         <div class="offcanvas-header text-bg-dark">
@@ -27,14 +24,14 @@
         </div>
         <div class="offcanvas-body sides">
             <!-- Actived on Beranda -->
-            <a href="beranda.php" class="nav-link pt-3 pb-3">Beranda</a> 
+            <a href="beranda.php" class="nav-link pt-3 pb-3">Beranda</a>
             <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi & Janji Temu</a>
             <a href="cetak_khs.php" class="nav-link pt-3 pb-3">Cetak KHS</a>
             <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Rekomendasi</a>
         </div>
     </div>
-    <div class="container-fluid" style="margin-bottom:70px;">    
-    <!-- Navigation-bar laman -->
+    <div class="container-fluid" style="margin-bottom:70px;">
+        <!-- Navigation-bar laman -->
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container-fluid">
                 <!-- Bagian button sidebar -->
@@ -44,7 +41,7 @@
                     </button>
                 </ul>
                 <ul class="navbar-nav">
-                <li class="nav-item">
+                    <li class="nav-item">
                         <a href="#" class="nav-link active">Rekomendasi</a>
                     </li>
                 </ul>
@@ -79,7 +76,7 @@
                 </div>
                 <div class="mt-3 mb-3 pb-1">
                     <label for="textarea" form="form-label">Alasan yang dapat dibenarkan :</label>
-                    <textarea name="textarea" id="textarea" class="form-control" style="height:200px;"></textarea>
+                    <textarea name="textarea" id="textarea" class="form-control" style="height:200px;" required></textarea>
                 </div>
                 <div class="container-fluid d-flex pb-3">
                     <button type="submit" class="btn btn-success me-2"><i class="bi bi-save me-4 ms-4"></i></button>
@@ -95,7 +92,7 @@
                         <th>Perihal</th>
                         <th>Tanggal Terbit</th>
                         <th>File</th>
-                    </tr>
+                        </tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -122,4 +119,5 @@
     </div>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

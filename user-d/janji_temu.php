@@ -86,7 +86,7 @@
      <div class="container-fluid pt-3 jt-body">
         <h4 class="pb-2"><i class="bi bi-book me-2"></i>Form Janji Temu</h4>
         <div class="container-fluid p-4 bg-light shadow jt-form">
-            <form id="janjiTemuForm" action="" method="post" onsubmit="return confirmSubmit()">
+            <form id="janjiTemuForm" action="proses_janji_temu.php" method="POST" onsubmit="return confirmSubmit()">
                 <div class="row mb-3 mt-4">
                     <div class="col-6">
                         <div class="input-group">
@@ -116,7 +116,7 @@
                     </div>
                 </div>
                 <div class="container-fluid d-flex flex-row pt-2 justify-content-end mt-3 mb-2">
-                    <button type="submit" class="btn btn-success me-2">Simpan<i class="bi bi-save ms-2"></i></button>
+                    <button type="submit" class="btn btn-success me-2" name = "simpan">Simpan<i class="bi bi-save ms-2"></i></button>
                     <button type="reset" class="btn btn-danger">Bersihkan<i class="bi bi-trash ms-2"></i></button>
                 </div>
             </form>

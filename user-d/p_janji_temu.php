@@ -131,6 +131,36 @@
                                                 echo '<i class="bi bi-check-circle"></i>';
                                             }
                                         ?>
+
+                    <?php
+                    // URL API
+                    $api_url = 'http://127.0.0.1:8080/api/konsul'; // Ganti dengan URL API yang sesuai
+
+                    $response = file_get_contents($api_url);
+                    $data = json_decode($response, true);
+
+                    // Mengecek apakah data berhasil diambil
+                    if ($data['success']) {
+                        foreach ($data['data'] as $item) {
+                            echo "<tr>";
+                            echo "<td>{$item['nama']}</td>";
+                            echo "<td>{$item['nim']}</td>";
+                            echo "<td>" . date('d/m/Y H:i', strtotime($item['datetime'])) . "</td>"; // Format tanggal
+                            echo "<td>{$item['materi']}</td>";
+                            echo "<td>{$item['status']}</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5' class='text-center'>Data tidak ditemukan</td></tr>";
+                    }
+                    ?>
+
+
+
+
+
+
+
                                     </button>
                                 </div>
                             </form>

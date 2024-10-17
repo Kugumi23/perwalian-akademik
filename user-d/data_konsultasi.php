@@ -102,33 +102,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    // URL API
-                    $api_url = 'http://127.0.0.1:8000/api/konsul'; // Ganti dengan URL API yang sesuai
+                <?php
+                // URL API
+                $api_url = 'http://127.0.0.1:8000/api/konsul'; // Ganti dengan URL API yang sesuai
 
-                    // Mengambil data dari API
-                    $response = file_get_contents($api_url);
-                    $data = json_decode($response, true);
+                // Mengambil data dari API
+                $response = file_get_contents($api_url);
+                $data = json_decode($response, true);
 
-                    // Mengecek apakah data berhasil diambil
-                    if ($data['success']) {
-                        $no = 1; // Untuk nomor urut
-                        foreach ($data['data'] as $item) {
-                            echo "<tr>";
-                            echo "<td>{$no}</td>";
-                            echo "<td>{$item['nim']}</td>";
-                            echo "<td>Mahasiswa {$no}</td>"; // Ganti sesuai data jika ada
-                            echo "<td>C</td>"; // Ganti sesuai data jika ada
-                            echo "<td>5</td>"; // Ganti sesuai data jika ada
-                            echo "<td>" . date('d/m/Y', strtotime($item['tanggal'])) . "</td>"; // Format tanggal
-                            echo "<td>{$item['materi']}</td>";
-                            echo "</tr>";
-                            $no++;
-                        }
-                    } else {
-                        echo "<tr><td colspan='7' class='text-center'>Data tidak ditemukan</td></tr>";
+                // Mengecek apakah data berhasil diambil
+                if ($data['success']) {
+                    $no = 1; // Untuk nomor urut
+                    foreach ($data['data'] as $item) {
+                        $nim = isset($item['nim']) ? $item['nim'] : 'Data tidak ditemukan';
+                        $nama = isset($item['mahasiswa']['nama']) ? $item['mahasiswa']['nama'] : 'Data tidak ditemukan';
+                        $id_kelas = isset($item['mahasiswa']['kelas']['abjad_kelas']) ? $item['mahasiswa']['kelas']['abjad_kelas'] : 'Data tidak ditemukan';
+                        $semester = isset($item['mahasiswa']['semester']) ? $item['mahasiswa']['semester'] : 'Data tidak ditemukan';
+                        $tanggal = isset($item['tanggal']) ? date('d/m/Y', strtotime($item['tanggal'])) : 'Data tidak ditemukan';
+                        $materi = isset($item['materi']) ? $item['materi'] : 'Data tidak ditemukan';
+
+                        echo "<tr>";
+                        echo "<td>{$no}</td>";
+                        echo "<td>{$nim}</td>";
+                        echo "<td>{$nama}</td>";
+                        echo "<td>{$id_kelas}</td>";
+                        echo "<td>{$semester}</td>";
+                        echo "<td>{$tanggal}</td>"; // Format tanggal
+                        echo "<td>{$materi}</td>";
+                        echo "</tr>";
+                        $no++;
                     }
-                    ?>
+                } else {
+                    echo "<tr><td colspan='7' class='text-center'>Data tidak ditemukan</td></tr>";
+                }
+                ?>
+
                 </tbody>
             </table>
         </div>

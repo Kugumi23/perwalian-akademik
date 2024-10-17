@@ -1,41 +1,52 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST['simpan'])) {
     // Ambil data dari form
     $nama = $_POST['nama'];
+    $tgl_konsul = $_POST['datetime'];
     $nim = $_POST['nim'];
     $materi = $_POST['materi'];
-    $datetime = $_POST['datetime'];
 
-    // URL API untuk menyimpan janji temu
-    $url = 'http://127.0.0.1:8000/api/janjitemu'; // Ganti dengan URL API yang sesuai
-
-    // Data yang akan dikirim
-    $data = array(
+    // Siapkan data dalam array untuk dikirimkan sebagai JSON
+    $data = [
         'nama' => $nama,
+        'tgl_konsul' => $tgl_konsul,
         'nim' => $nim,
-        'materi' => $materi,
-        'datetime' => $datetime,
-    );
+        'materi' => $materi
+    ];
+
+    // Mengubah array menjadi format JSON
+    $jsonData = json_encode($data);
 
     // Inisialisasi cURL
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    $ch = curl_init();
 
-    // Eksekusi permintaan
+    // Setel opsi cURL
+    curl_setopt($ch, CURLOPT_URL, "http://127.0.0.1:8000/api/janjitemu"); // Ganti URL sesuai dengan endpoint API kamu
+    curl_setopt($ch, CURLOPT_POST, 1); // Set metode POST
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData); // Kirim data JSON
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Kembalikan respon sebagai string
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($jsonData)
+    ]); // Set header untuk JSON
+
+    // Eksekusi permintaan cURL
     $response = curl_exec($ch);
-    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    // Periksa jika ada error
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
 
     // Tutup cURL
     curl_close($ch);
 
-    // Cek respons
-    if ($http_code == 200) {
-        echo "Data berhasil disimpan!";
-        // Anda bisa melakukan redirect atau menampilkan pesan sukses di sini
+    // Tampilkan respon dari API (opsional, bisa diubah menjadi redirect)
+    $result = json_decode($response, true);
+    if ($result && isset($result['message'])) {
+        echo $result['message']; // Tampilkan pesan sukses atau error
     } else {
-        echo "Terjadi kesalahan saat menyimpan data. Kode HTTP: " . $http_code;
+        echo 'Gagal menghubungkan ke API.';
     }
 }
 ?>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +10,16 @@
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
-            background-image:url('picture/bg_main.jpg');
+            background-image: url('picture/bg_main.jpg');
         }
+
         .dk-body {
-            padding-left:60px;
-            padding-right:60px;
+            padding-left: 60px;
+            padding-right: 60px;
         }
     </style>
 </head>
+
 <body>
     <!-- Menu sidebar -->
     <div class="offcanvas offcanvas-start" id="canvas">
@@ -27,11 +30,11 @@
         <div class="offcanvas-body sides">
             <div class="container-fluid">
                 <?php
-                    include ("dashboard1.php");
-                    echo "<br>";
-                    include ("dashboard2.php");
-                    echo "<br>";
-                    include ("dashboard3.php");
+                include("dashboard1.php");
+                echo "<br>";
+                include("dashboard2.php");
+                echo "<br>";
+                include("dashboard3.php");
                 ?>
             </div>
             <div class="container-fluid" style="font-size:12px;">
@@ -60,7 +63,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav flex-row d-flex ms-auto">
-                    <li class="nav-item dropdown"> 
+                    <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                             Nama_dosen
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
@@ -101,7 +104,7 @@
                 <tbody>
                     <?php
                     // URL API
-                    $api_url = 'http://127.0.0.1:8080/api/konsul'; // Ganti dengan URL API yang sesuai
+                    $api_url = 'http://127.0.0.1:8000/api/konsul'; // Ganti dengan URL API yang sesuai
 
                     // Mengambil data dari API
                     $response = file_get_contents($api_url);
@@ -132,4 +135,5 @@
     </div>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

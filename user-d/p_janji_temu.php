@@ -83,17 +83,23 @@
         <div class="container-fluid d-flex flex-row">
             <h4>Permintaan Janji Temu</h4>
             <form action="" method="post" class="d-flex flex-row ms-auto">
-                <select class="form-select me-2" name="cell" id="cell">
-                    <option>Semester 1</option>
-                    <option>Semester 2</option>
-                    <option>Semester 3</option>
-                    <option>Semester 4</option>
-                    <option>Semester 5</option>
-                    <option>Semester 6</option>
-                </select>
-                <div class="input-group">
-                    <input type="search" name="cari" id="cari" class="form-control" placeholder="cari nama mahasiswa">
-                    <button type="submit" class="btn btn-primary" name="pencarian"><i class="bi bi-search"></i></button>
+                <div class="row">
+                    <div class="col-5">
+                        <select class="form-select me-2" name="cell" id="cell">
+                            <option>Semester 1</option>
+                            <option>Semester 2</option>
+                            <option>Semester 3</option>
+                            <option>Semester 4</option>
+                            <option>Semester 5</option>
+                            <option>Semester 6</option>
+                        </select>
+                    </div>
+                    <div class="col-7">
+                        <div class="input-group">
+                            <input type="search" name="cari" id="cari" class="form-control" placeholder="cari nama mahasiswa">
+                            <button type="submit" class="btn btn-primary" name="pencarian"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

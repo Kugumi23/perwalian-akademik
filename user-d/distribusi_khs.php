@@ -80,14 +80,13 @@
             </div>
         </nav>
     </div>
-
+    <!-- Batas Navigation-Bar -->
     <div class="container mt-5 pt-5">
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-body">
                     <form action="">
                         <div class="mb-3 mt-3">
-                           
                                 <select class="form-select" aria-label="Default select example">
                                     <option selected>Semua Mahasiswa</option>
                                     <option value="1">Siti Sabrina</option>

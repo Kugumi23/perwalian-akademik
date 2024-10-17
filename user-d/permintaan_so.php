@@ -82,17 +82,23 @@
         <div class="container-fluid d-flex flex-row">
             <h4>Permintaan Stop Out</h4>
             <form action="" class="d-flex flex-row ms-auto">
-                <select class="form-select me-2" name="cell" id="cell">
-                    <option value="Semester 1">Semester 1</option>
-                    <option value="Semester 2">Semester 2</option>
-                    <option value="Semester 3">Semester 3</option>
-                    <option value="Semester 4">Semester 4</option>
-                    <option value="Semester 5">Semester 5</option>
-                    <option value="Semester 6">Semester 6</option>
-                </select>
-                <div class="input-group">
-                    <input type="search" name="cari" id="cari" class="form-control" placeholder="cari nama mahasiswa">
-                    <button type="submit" class="btn btn-primary" name="pencarian"><i class="bi bi-search"></i></button>
+                <div class="row">
+                    <div class="col-5">
+                        <select class="form-select me-2" name="cell" id="cell">
+                            <option>Semester 1</option>
+                            <option>Semester 2</option>
+                            <option>Semester 3</option>
+                            <option>Semester 4</option>
+                            <option>Semester 5</option>
+                            <option>Semester 6</option>
+                        </select>
+                    </div>
+                    <div class="col-7">
+                        <div class="input-group">
+                            <input type="search" name="cari" id="cari" class="form-control" placeholder="cari nama mahasiswa">
+                            <button type="submit" class="btn btn-primary" name="pencarian"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -123,7 +129,12 @@
                             <form action="" method="post" class="d-flex flex-row">
                                 <div class="me-2">
                                     <button class="btn btn-warning" type="submit" name="acc">
-                                        <a href="laman-validasi-so.php" class="nav-link">Validasi</a>
+                                        Validasi
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-danger" name="den">
+                                        Tolak
                                     </button>
                                 </div>
                             </form>

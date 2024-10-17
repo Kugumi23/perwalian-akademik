@@ -101,7 +101,7 @@
                 <tbody>
                     <?php
                     // URL API
-                    $api_url = 'http://127.0.0.1:8080/api/konsul'; // Ganti dengan URL API yang sesuai
+                    $api_url = 'http://127.0.0.1:8000/api/konsul'; // Ganti dengan URL API yang sesuai
 
                     // Mengambil data dari API
                     $response = file_get_contents($api_url);

@@ -91,7 +91,11 @@
                     <div class="col-6">
                         <div class="input-group">
                             <span class="input-group-text">Nama</span>
-                            <input type="text" class="form-control" name="nama" required>
+                            <select class="form-select" placeholder="pilih mahasiswa">
+                                <option value="nama_mahasiswa1">Mahasiswa1</option>
+                                <option value="nama_mahasiswa2">Mahasiswa2</option>
+                                <option value="nama_mahasiswa3">Mahasiswa3</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-6">

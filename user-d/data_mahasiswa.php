@@ -113,26 +113,6 @@
 </body>
 </html> -->
 
-<?php
-// Konfigurasi koneksi ke database
-$servername = "localhost"; // Atau server database Anda
-$username = "root"; // Username database
-$password = ""; // Password database
-$dbname = "db_apiteam"; // Nama database yang digunakan
-
-// Membuat koneksi
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
-
-// Query SQL untuk mengambil data mahasiswa
-$sql = "SELECT nim, nama, no_hp, semester FROM mahasiswa";
-$result = $conn->query($sql);
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -157,8 +137,61 @@ $result = $conn->query($sql);
 
 <body>
     <!-- Menu sidebar -->
+    <div class="offcanvas offcanvas-start" id="canvas">
+        <div class="offcanvas-header text-bg-dark">
+            <h4 class="canva-title pt-2">Dashboard</h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body sides">
+            <div class="container-fluid">
+                <?php
+                    include ("dashboard1.php");
+                    echo "<br>";
+                    include ("dashboard2.php");
+                    echo "<br>";
+                    include ("dashboard3.php");
+                ?>
+            </div>
+            <div class="container-fluid" style="font-size:12px;">
+                <hr>
+                <span>MENU</span>
+                <hr>
+            </div>
+            <a href="data_mahasiswa.php" class="nav-link active pt-3 pb-3 text-light activated">Data Mahasiswa</a>
+            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
+            <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
+            <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
+        </div>
+    </div>  
     <!-- (Kode sidebar dan navbar lainnya) -->
-
+    <div class="container-fluid" style="margin-bottom:70px;">
+        <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">Data Konsultasi</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav flex-row d-flex ms-auto">
+                    <li class="nav-item dropdown"> 
+                        <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
+                            Nama_dosen
+                            <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="dropdown-item">Pengaturan</a></li>
+                            <li><a href="#" class="dropdown-item">Keluar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <!-- Bagian utama halaman -->
     <div class="container-fluid pt-5 dm-body">
         <div class="container-fluid pt-5">
@@ -171,33 +204,54 @@ $result = $conn->query($sql);
                     </div>
                 </form>
             </div>
-            <table class="table table-striped">
+            <table class="table table-striped" style="font-size:10px;">
                 <thead class="table-danger">
                     <tr>
                         <th>NIM</th>
                         <th>Nama Mahasiswa</th>
-                        <th>Jenis Kelamin</th>
-                        <th>No. Telp</th>
-                        <th>Semester</th>
+                        <th>Kode Prodi</th>
+                        <th>semester</th>
+                        <th>id-kelas</th>
+                        <th>nip-dosen pembimbing</th>
+                        <th>no-hp</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    // Cek apakah data ada
-                    if ($result->num_rows > 0) {
-                        // Looping data mahasiswa
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $row["nim"] . "</td>";
-                            echo "<td>" . $row["nama"] . "</td>";
-                            // echo "<td>" . $row["jenis_kelamin"] . "</td>";
-                            echo "<td>" . $row["no_hp"] . "</td>";
-                            echo "<td>" . $row["semester"] . "</td>";
-                            echo "</tr>";
+                        $api_url = 'http://127.0.0.1:8000/api/mahasiswa';
+
+                        $response = file_get_contents($api_url);
+                        $data = json_decode($response, true);
+
+                        if ($data['success']) {
+                            foreach ($data['data'] as $list) {
+                                echo "<tr>";
+                                    echo "<td>";
+                                        echo $list['nim'];
+                                    echo "</td>";
+                                    echo "<td>";
+                                        echo $list['nama'];
+                                    echo "</td>";
+                                    echo "<td>";
+                                        echo $list['kode_prodi'];
+                                    echo "</td>";
+                                    echo "<td>";
+                                        echo $list['semester'];
+                                    echo "</td>";
+                                    echo "<td>";
+                                        echo $list['id_kelas'];
+                                    echo "</td>";
+                                    echo "<td>";
+                                        echo $list['nip'];
+                                    echo "</td>";
+                                    echo "<td>";
+                                        echo $list['no_hp'];
+                                    echo "</td>";
+                                echo "</tr>";
+
+                            }
+
                         }
-                    } else {
-                        echo "<tr><td colspan='5'>Tidak ada data</td></tr>";
-                    }
                     ?>
                 </tbody>
             </table>
@@ -205,10 +259,4 @@ $result = $conn->query($sql);
     </div>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
-
-<?php
-// Tutup koneksi
-$conn->close();
-?>

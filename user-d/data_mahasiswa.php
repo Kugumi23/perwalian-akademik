@@ -90,14 +90,25 @@
             <table class="table table-striped">
                 <thead class="table-danger">
                     <tr>
+                        <th>No</th>
                         <th>NIM</th>
                         <th>Nama Mahasiswa</th>
+                        <th>Jenis Kelamin</th>
                         <th>No. Telp</th>
                         <th>Semester</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Content of the table from api -->
+            
+
+                    <tr>
+                        <td>1</td>
+                        <td>3202216000</td>
+                        <td>Mahasiswa 1</td>
+                        <td>Laki-Laki</td>
+                        <td>1234567890</td>
+                        <td>5</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

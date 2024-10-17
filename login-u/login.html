@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Inter"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/login.css" />
+    <link
+      rel="stylesheet"
+      href="vendor/twbs/bootstrap/dist.css/bootstrap.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <img src="picture/polnep_logo.png" alt="polnep_logo" />
+        <p class="welcome">SELAMAT DATANG</p>
+        <h2>Perwalian Akademik</h2>
+        <p class="description">
+          Mendigitalkan data-data yang tersimpan pada Buku Saku Pembimbingan
+          Akademik Mahasiswa (BSPAM)
+        </p>
+      </div>
+      <div class="right">
+        <pre><p class="login">Log <strong>In</strong></p></pre>
+        <form id="loginForm">
+          <div class="form-group">
+            <input
+              type="text"
+              id="nip-nim"
+              name="nip-nim"
+              placeholder="masukkan nip/nim anda"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="password"
+              required
+            />
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" name="terms" />
+            <label for="ingat_saya">Remember Me</label>
+          </div>
+          <button type="submit" class="login-btn">Login</button>
+        </form>
+      </div>
+    </div>
+    <link rel="stylesheet" href="vendor/twbs/bootstrap/dist.js/bootstrap.js" />
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          // Cek apakah form valid
+          if (!this.checkValidity()) {
+            event.preventDefault(); // Mencegah pengiriman form jika tidak valid
+            return; // Keluar dari fungsi
+          }
+
+          const nipNim = document.getElementById("nip-nim").value;
+          const password = document.getElementById("password").value;
+
+          // Mengirim permintaan ke API
+          fetch("https://api.example.com/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ nipNim, password }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Login failed");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              // Mengarahkan pengguna berdasarkan role
+              switch (data.role) {
+                case "dosen":
+                  window.location.href = "dosen_dashboard.html";
+                  break;
+                case "admin":
+                  window.location.href = "admin_dashboard.html";
+                  break;
+                case "mahasiswa":
+                  window.location.href = "mahasiswa_dashboard.html";
+                  break;
+                default:
+                  alert("Role tidak dikenali");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("Login gagal. Silakan coba lagi.");
+            });
+        });
+    </script>
+  </body>
+</html>

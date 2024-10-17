@@ -80,7 +80,7 @@
     <!-- Batas Navigation-Bar -->
     <div class="container-fluid pt-4 pjt-body">
         <div class="container-fluid d-flex flex-row">
-            <h4>Permintaan Janji Temu</h4>
+            <h4>Permintaan Stop Out</h4>
             <form action="" class="d-flex flex-row ms-auto">
                 <select class="form-select me-2" name="cell" id="cell">
                     <option value="Semester 1">Semester 1</option>

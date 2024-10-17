@@ -7,10 +7,6 @@
     <title>BSPAM Online : Distribusi KHS</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/upload_khs.css">
-    
-
-
-
 </head>
 <style>
     body {
@@ -87,31 +83,35 @@
                 <div class="card-body">
                     <form action="">
                         <div class="mb-3 mt-3">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Semua Mahasiswa</option>
-                                    <option value="1">Siti Sabrina</option>
-                                </select>  
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Semua Mahasiswa</option>
+                                <option>Siti Sabrina</option>
+                            </select>  
                         </div>
-
-
+                        <div class="input-group mt-3 mb-3">
+                            <span class="input-group-text">Semester KHS</span>
+                            <select name="sms_khs" id="sms_khs" class="form-select">
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                            </select>
+                        </div>
                         <div class="mb-3 mt-3">
                             <input type="file" class="form-control" id="formfile">
                         </div>
                           <div class="form-check mb-3">
-                          </div>
-                          <div class="mb-3 mt-3 text-center">
-                            <button type="submit" class="btn btn-primary shadow" >Submit</button>
-                          </div>
-                          
-
+                        </div>
+                        <div class="mb-3 mt-3 text-center">
+                            <button type="submit" class="btn btn-primary shadow">Submit</button>
+                        </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
-
-      </div>
+    </div>
 
 
 

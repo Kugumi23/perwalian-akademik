@@ -45,12 +45,12 @@
             <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
         </div>
     </div>
-<!-- Navigation-bar laman -->
-<div class="container-fluid" style="margin-bottom:70px;">
-        <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
-            <div class="container-fluid">
-<!-- Bagian Sidebar -->
-<ul class="navbar-nav">
+    <!-- Navigation-bar laman -->
+    <div class="container-fluid" style="margin-bottom:70px;">
+            <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+                <div class="container-fluid">
+                <!-- Bagian Sidebar -->
+                    <ul class="navbar-nav">
                     <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -102,10 +102,8 @@
             
 
                     <tr>
-                        <td>1</td>
                         <td>3202216000</td>
                         <td>Mahasiswa 1</td>
-                        <td>Laki-Laki</td>
                         <td>1234567890</td>
                         <td>5</td>
                     </tr>

@@ -17,7 +17,9 @@
     <body>
         <div class="offcanvas offcanvas-start" id="mycanvas">
             <div class="offcanvas-header text-bg-dark">
-                <h4 class="canvas-title pt-2">Menu</h4>
+                <h4 class="canvas-title pt-2">
+                    Menu
+                </h4>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
             </div>
             <div class="offcanvas-body sides">
@@ -64,21 +66,16 @@
             <div class="container-fluid pt-4">
                 <p class="text-warning">Perhatian : Anda dapat mengajukan janji temu yang nantinya akan ditampilkan di dalam <b>Jadwal Konsultasi Mahasiswa</b>, proses ini melibatkan mahasiswa dan dosen pembimbing dimana tidak semua janji temu akan masuk ke tabel jadwal atau bila tidak setujui oleh dosen pembimbing</p>
                 <table class="table table-striped">
-                    <tr class="table-danger">
-                        <th>Nama</th>
-                        <th>NIM</th>
-                        <th>Tanggal/waktu bimbingan</th>
-                    </tr>
-                    <tr>
-                        <td>Nama Mahasiswa 1</td>
-                        <td>3202216000</td>
-                        <td>2/10/2024 12.00</td>
-                    </tr>
-                    <tr>
-                        <td>Nama Mahasiswa 2</td>
-                        <td>3202216000</td>
-                        <td>2/10/2024 14.00</td>
-                    </tr>
+                    <thead>
+                        <tr class="table-danger">
+                            <th>Nama</th>
+                            <th>NIM</th>
+                            <th>Tanggal/waktu bimbingan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
                 </table>
             </div>
             <div class="container-fluid pt-5">

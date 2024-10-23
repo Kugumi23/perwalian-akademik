@@ -1,6 +1,6 @@
 <?php
-    session_star();
+    session_start();
     if (!isset($_SESSION['username'])) {
-        header('Location: login-user.html'); 
+        header('Location: login-user.php'); 
     }
 ?>

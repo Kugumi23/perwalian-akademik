@@ -22,9 +22,9 @@
         <div class="offcanvas-body sides">
             <!-- Actived on Beranda -->
             <a href="#" class="nav-link active active pt-3 pb-3 text-light activated">Beranda</a> 
-            <a href="data_konsultasi.html" class="nav-link pt-3 pb-3">Data Konsultasi & Janji Temu</a>
-            <a href="cetak_khs.html" class="nav-link pt-3 pb-3">Cetak KHS</a>
-            <a href="rekomendasi.html" class="nav-link pt-3 pb-3">Rekomendasi</a>
+            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi & Janji Temu</a>
+            <a href="cetak_khs.php" class="nav-link pt-3 pb-3">Cetak KHS</a>
+            <a href="rekomendasi.php" class="nav-link pt-3 pb-3">Rekomendasi</a>
         </div>
     </div>
     <div class="container-fluid" style="margin-bottom:70px;">    

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +51,7 @@
                 </div>
                 <div class="col-md-6 col-sm-12 bg-light rounded-end shadow-lg">
                     <div class="p-4 text-center mt-4 center">
-                        <form id="loginForm" action="" method="post" enctype="multipart/form-data">
+                        <form id="loginForm" action="login.php" method="post" enctype="multipart/form-data">
                             <h3 class="mb-5">Masuk Akun <b>BSPAM</b></h3>
                             <div class="input-group pe-4 ps-4">
                                 <span
@@ -71,7 +72,7 @@
                                         class="form-check-input"
                                         name="remember_me"
                                         id="check1" />
-                                    <label for="form-check-labe">Ingat saya</label>
+                                    <label for="form-check-label">Ingat saya</label>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary" name="masuk">
@@ -88,58 +89,7 @@
             </div>
         </div>
     </div>
-
-    <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Mencegah form dari submit default
-
-            // Ambil data dari form
-            const id = document.getElementById('id').value;
-            const password = document.getElementById('password').value;
-
-            // Lakukan fetch ke API
-            fetch("http://localhost:8000/api/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        id,
-                        password
-                    }),
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.success) {
-                        localStorage.setItem('token', data.data.token);
-                        // Cek role pengguna
-                        switch (data.data.role) {
-                            case "admin":
-                                window.location.href = "upload_khs.html"; // Ganti dengan URL dashboard admin
-                                break;
-                            case "dosen":
-                                window.location.href = "../user-d/data_mahasiswa.php"; // Ganti dengan URL dashboard dosen
-                                break;
-                            case "mahasiswa":
-                                window.location.href = "../user-m/beranda.html"; // Ganti dengan URL dashboard mahasiswa
-                                break;
-                            default:
-                                alert("Role tidak dikenali");
-                                localStorage.setItem('token', '');
-                        }
-                    } else {
-                        alert(data.data.message); // Tampilkan pesan error jika login gagal
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    alert(
-                        "Terjadi kesalahan saat melakukan login. Silakan coba lagi."
-                    );
-                });
-        });
-    </script>
+    <script src="login.js"></script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
-
 </html>

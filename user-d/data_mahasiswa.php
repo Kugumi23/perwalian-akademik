@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +65,7 @@
                  <ul class="navbar-nav flex-row d-flex ms-auto">
                     <li class="nav-item dropdown"> 
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            Nama_dosen
+                            <span class="me-2" id="id-show"></span>
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
                         </a>
                         <ul class="dropdown-menu">
@@ -100,19 +102,14 @@
                 </thead>
                 <tbody>
             
-
-                    <tr>
-                        <td>1</td>
-                        <td>3202216000</td>
-                        <td>Mahasiswa 1</td>
-                        <td>Laki-Laki</td>
-                        <td>1234567890</td>
-                        <td>5</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <script src="../login-u/user-id-show.js"></script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+    </script>
 </body>
 </html>

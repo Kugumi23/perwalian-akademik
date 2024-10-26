@@ -26,6 +26,33 @@
 </head>
 
 <body>
+    <!-- Menu sidebar -->
+    <div class="offcanvas offcanvas-start" id="canvas">
+        <div class="offcanvas-header text-bg-dark">
+            <h4 class="canva-title pt-2">Dashboard</h4>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body sides">
+            <div class="container-fluid">
+                <?php
+                include("dashboard1.php");
+                echo "<br>";
+                include("dashboard2.php");
+                echo "<br>";
+                include("dashboard3.php");
+                ?>
+            </div>
+            <div class="container-fluid" style="font-size:12px;">
+                <hr>
+                <span>MENU</span>
+                <hr>
+            </div>
+            <a href="data_mahasiswa.php" class="nav-link active pt-3 pb-3 text-light activated">Data Mahasiswa</a>
+            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
+            <a href="distribusi_khs.php" class="nav-link pt-3 pb-3">Distribusi KHS</a>
+            <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
+        </div>
+    </div>
     <!-- Navigation-bar laman -->
     <div class="container-fluid" style="margin-bottom:70px;">
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">

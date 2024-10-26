@@ -77,16 +77,41 @@
         </nav>
     </div>
     <!-- Batas Navigation-Bar -->
+    <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
+    <title>BSPAM Online : Distribusi KHS</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/upload_khs.css">
+    <style>
+        body {
+            background-image: url('picture/bg_main.jpg');
+        }
+        .dk-body {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar dan Navigasi -->
+    <!-- ... (kode sidebar dan navigasi tetap) ... -->
+
     <div class="container mt-5 pt-5">
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-body">
                     <form action="">
                         <div class="mb-3 mt-3">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Semua Mahasiswa</option>
-                                <option>Siti Sabrina</option>
-                            </select>  
+                            <!-- Dropdown nama mahasiswa -->
+                            <select id="mahasiswaDropdown" class="form-select" aria-label="Default select example">
+                                <option selected>Memuat data mahasiswa...</option>
+                            </select>
                         </div>
                         <div class="input-group mt-3 mb-3">
                             <span class="input-group-text">Semester KHS</span>
@@ -102,8 +127,7 @@
                         <div class="mb-3 mt-3">
                             <input type="file" class="form-control" id="formfile">
                         </div>
-                          <div class="form-check mb-3">
-                        </div>
+                        <div class="form-check mb-3"></div>
                         <div class="mb-3 mt-3 text-center">
                             <button type="submit" class="btn btn-primary shadow">Submit</button>
                         </div>
@@ -113,9 +137,52 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const token = localStorage.getItem('token');
 
+            // Jika token tidak ditemukan, arahkan ke halaman login
+            if (!token) {
+                alert("Anda harus login terlebih dahulu.");
+                window.location.href = "../login.html";
+                return;
+            }
 
+            // Mengambil data mahasiswa dari API
+            fetch("http://localhost:8000/api/perwalian/d/mahasiswa", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                const dropdown = document.getElementById("mahasiswaDropdown");
+                dropdown.innerHTML = ""; // Kosongkan dropdown sebelum mengisi
+
+                if (data.success) {
+                    data.data.mahasiswa.forEach((mahasiswa) => {
+                        const option = document.createElement("option");
+                        option.value = mahasiswa.nim; // Atur value sebagai NIM
+                        option.text = mahasiswa.nama; // Atur teks sebagai nama mahasiswa
+                        dropdown.appendChild(option); // Tambah opsi ke dropdown
+                    });
+                } else {
+                    const option = document.createElement("option");
+                    option.text = "Gagal memuat data mahasiswa";
+                    dropdown.appendChild(option);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                const dropdown = document.getElementById("mahasiswaDropdown");
+                dropdown.innerHTML = `<option>Terjadi kesalahan saat memuat data mahasiswa.</option>`;
+            });
+        });
+    </script>
 
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

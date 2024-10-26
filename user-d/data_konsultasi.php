@@ -70,7 +70,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#" class="dropdown-item">Pengaturan</a></li>
-                            <li><a href="#" class="dropdown-item">Keluar</a></li>
+                            <li><a href="#" class="dropdown-item" onclick="logout()">Keluar</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -101,47 +101,64 @@
                         <th>Materi</th>
                     </tr>
                 </thead>
-                <tbody>
-                <?php
-                // URL API
-                $api_url = 'http://127.0.0.1:8000/api/konsul'; // Ganti dengan URL API yang sesuai
-
-                // Mengambil data dari API
-                $response = file_get_contents($api_url);
-                $data = json_decode($response, true);
-
-                // Mengecek apakah data berhasil diambil
-                if ($data['success']) {
-                    $no = 1; // Untuk nomor urut
-                    foreach ($data['data'] as $item) {
-                        $nim = isset($item['nim']) ? $item['nim'] : 'Data tidak ditemukan';
-                        $nama = isset($item['mahasiswa']['nama']) ? $item['mahasiswa']['nama'] : 'Data tidak ditemukan';
-                        $id_kelas = isset($item['mahasiswa']['kelas']['abjad_kelas']) ? $item['mahasiswa']['kelas']['abjad_kelas'] : 'Data tidak ditemukan';
-                        $semester = isset($item['mahasiswa']['semester']) ? $item['mahasiswa']['semester'] : 'Data tidak ditemukan';
-                        $tanggal = isset($item['tanggal']) ? date('d/m/Y', strtotime($item['tanggal'])) : 'Data tidak ditemukan';
-                        $materi = isset($item['materi']) ? $item['materi'] : 'Data tidak ditemukan';
-
-                        echo "<tr>";
-                        echo "<td>{$no}</td>";
-                        echo "<td>{$nim}</td>";
-                        echo "<td>{$nama}</td>";
-                        echo "<td>{$id_kelas}</td>";
-                        echo "<td>{$semester}</td>";
-                        echo "<td>{$tanggal}</td>"; // Format tanggal
-                        echo "<td>{$materi}</td>";
-                        echo "</tr>";
-                        $no++;
-                    }
-                } else {
-                    echo "<tr><td colspan='7' class='text-center'>Data tidak ditemukan</td></tr>";
-                }
-                ?>
-
+                <tbody id="konsultasi-table-body">
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem('token');
 
-</html>
+            // Jika token tidak ditemukan, arahkan ke halaman login
+            if (!token) {
+                alert("Anda harus login terlebih dahulu.");
+                window.location.href = "../login.php";
+                return;
+            }
+
+            // Mengambil data konsultasi dari API
+            fetch("http://127.0.0.1:8000/api/perwalian/d/konsul", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        const tableBody = document.getElementById("konsultasi-table-body");
+                        tableBody.innerHTML = ""; // Kosongkan tabel jika ada data lama
+
+                        // Menampilkan data konsultasi dalam tabel
+                        data.data.forEach((item, index) => {
+                            const row = `<tr>
+                                        <td>${index + 1}</td>
+                                        <td>${item.nim}</td>
+                                        <td>${item.mahasiswa.nama}</td>
+                                        <td>${item.mahasiswa.kelas.abjad_kelas}</td>
+                                        <td>${item.mahasiswa.semester}</td>
+                                        <td>${new Date(item.tanggal).toLocaleDateString()}</td>
+                                        <td>${item.materi}</td>
+                                    </tr>`;
+                            tableBody.innerHTML += row;
+                        });
+                    } else {
+                        alert("Gagal memuat data konsultasi.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Terjadi kesalahan saat memuat data konsultasi.");
+                });
+        });
+
+        // Fungsi untuk logout
+        function logout() {
+            localStorage.removeItem('token'); // Hapus token dari localStorage
+            alert("Anda telah keluar.");
+            window.location.href = "../login.php"; // Arahkan ke halaman login
+        }
+    </script>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

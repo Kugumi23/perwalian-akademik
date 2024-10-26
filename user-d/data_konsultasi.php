@@ -129,7 +129,7 @@
                 .then((data) => {
                     if (data.success) {
                         const tableBody = document.getElementById("konsultasi-table-body");
-                        tableBody.innerHTML = ""; // Kosongkan tabel jika ada data lama
+                        tableBody.innerHTML = ""; 
 
                         // Menampilkan data konsultasi dalam tabel
                         data.data.forEach((item, index) => {

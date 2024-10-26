@@ -7,7 +7,6 @@
     <title>BSPAM Online : Permintaan SO</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/permintaan_so.css">
-
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
@@ -47,22 +46,22 @@
             <a href="permintaan_so.php" class="nav-link active pt-3 pb-3 text-light activated">Permintaan Stop Out</a>
         </div>
     </div>
+
     <!-- Navigation-bar laman -->
     <div class="container-fluid" style="margin-bottom:70px;">
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container-fluid">
-                <!-- Bagian Sidebar -->
-                 <ul class="navbar-nav">
+                <ul class="navbar-nav">
                     <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                 </ul>
-                 <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="#" class="nav-link active">Permintaan Stop Out</a>
                     </li>
-                 </ul>
-                 <ul class="navbar-nav flex-row d-flex ms-auto">
+                </ul>
+                <ul class="navbar-nav flex-row d-flex ms-auto">
                     <li class="nav-item dropdown"> 
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                             Nama_dosen
@@ -73,10 +72,11 @@
                             <li><a href="#" class="dropdown-item">Keluar</a></li>
                         </ul>
                     </li>
-                 </ul>
+                </ul>
             </div>
         </nav>
     </div>
+
     <!-- Batas Navigation-Bar -->
     <div class="container-fluid pt-4 pjt-body">
         <div class="container-fluid d-flex flex-row">
@@ -114,36 +114,105 @@
                         <th>Semester</th>
                         <th>Alasan</th>
                         <th>Status</th>
+                        <th>Aksi</th> <!-- Menambahkan kolom aksi -->
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Mahasiswa 1</td>
-                        <td>3202216000</td>
-                        <td>08959367</td>
-                        <td>20/01/2024</td>
-                        <td>2022</td>
-                        <td>5</td>
-                        <td>Cuti Kuliah</td>
-                        <td>
-                            <form action="" method="post" class="d-flex flex-row">
-                                <div class="me-2">
-                                    <button class="btn btn-warning" type="submit" name="acc">
-                                        Validasi
-                                    </button>
-                                </div>
-                                <div>
-                                    <button type="submit" class="btn btn-danger" name="den">
-                                        Tolak
-                                    </button>
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
+                <tbody id="konsultasi-table-body">
+                    <!-- Data akan diisi melalui JavaScript -->
                 </tbody>
             </table>
         </div>
     </div>
+
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const token = localStorage.getItem('token');
+
+    // Jika token tidak ditemukan, arahkan ke halaman login
+    if (!token) {
+        alert("Anda harus login terlebih dahulu.");
+        window.location.href = "../login.php";
+        return;
+    }
+
+    // Mengambil data mahasiswa dari API
+    fetch("http://127.0.0.1:8000/api/perwalian/d/rekomendasi", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.success) {
+            const tableBody = document.getElementById("konsultasi-table-body");
+            tableBody.innerHTML = ""; 
+
+            // Menampilkan data mahasiswa dalam tabel
+            data.data.forEach((mahasiswa) => {
+                // Menampilkan setiap rekomendasi untuk mahasiswa
+                mahasiswa.rekomendasi.forEach((rekomendasi) => {
+                    const row = `
+                        <tr>
+                            <td>${mahasiswa.nama}</td>
+                            <td>${mahasiswa.nim}</td>
+                            <td>${mahasiswa.no_hp}</td>
+                            <td>${new Date(rekomendasi.tanggal_pengajuan).toLocaleString()}</td>
+                            <td>${mahasiswa.semester}</td>
+                            <td>${rekomendasi.keterangan}</td>
+                            <td>
+                                <button class="btn btn-warning" type="button" onclick="handleApproval(${rekomendasi.id}, true)">
+                                    Validasi
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="handleApproval(${rekomendasi.id}, false)">
+                                    Tolak
+                                </button>
+                            </td>
+                        </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            });
+        } else {
+            alert("Gagal memuat data mahasiswa.");
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan saat memuat data mahasiswa.");
+    });
+});
+
+// Fungsi untuk menangani persetujuan atau penolakan
+function handleApproval(id, isApproved) {
+    const token = localStorage.getItem('token');
+    const action = isApproved ? "validasi" : "tolak";
+    const apiUrl = `http://127.0.0.1:8000/api/perwalian/d/konsul/${action}/${id}`;
+
+    fetch(apiUrl, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({}) // Tambahkan data yang diperlukan di sini jika perlu
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.success) {
+            alert(`Rekomendasi berhasil ${isApproved ? "divalidasi" : "ditolak"}.`);
+            location.reload(); // Reload the page to see updated data
+        } else {
+            alert("Gagal mengubah status rekomendasi.");
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan saat mengubah status rekomendasi.");
+    });
+}
+
+    </script>
 </body>
 </html>

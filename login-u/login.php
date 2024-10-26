@@ -114,8 +114,8 @@
                         localStorage.setItem('token', data.data.token);
                         // Cek role pengguna
                         switch (data.data.role) {
-                            case "admin":
-                                window.location.href = "upload_khs.html"; // Ganti dengan URL dashboard admin
+                            case "staff":
+                                window.location.href = "../user-adm/upload_khs.html"; // Ganti dengan URL dashboard admin
                                 break;
                             case "dosen":
                                 window.location.href = "../user-d/data_mahasiswa.php"; // Ganti dengan URL dashboard dosen

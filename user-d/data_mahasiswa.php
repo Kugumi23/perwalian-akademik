@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +18,7 @@
             padding-right: 60px;
         }
     </style>
+    <script src="../login-u/session_start.js"></script>
 </head>
 
 <body>
@@ -74,8 +70,9 @@
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Pengaturan</a></li>
-                            <li><a href="#" class="dropdown-item">Keluar</a></li>
+                            <form action="post" id="logout">
+                                <button type="submit" class="btn btn-sm"><span class="text-center">Keluar</span></button>
+                            </form>
                         </ul>
                     </li>
                 </ul>

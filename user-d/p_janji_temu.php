@@ -131,7 +131,7 @@
     // Jika token tidak ditemukan, arahkan ke halaman login
     if (!token) {
         alert("Anda harus login terlebih dahulu.");
-        window.location.href = "../login.php";
+        window.location.href = "../login-u/login.php";
         return;
     }
 

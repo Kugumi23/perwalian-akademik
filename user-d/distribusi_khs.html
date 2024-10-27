@@ -17,7 +17,6 @@
             padding-left:60px;
             padding-right:60px;
         }
-
 </style>
 <body>
     <div class="offcanvas offcanvas-start" id="mycanvas">
@@ -69,8 +68,7 @@
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-right: 2px; margin-left: 3px;" class="rounded-pill">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Pengaturan</a></li>
-                            <li><a href="#" class="dropdown-item">Keluar</a></li>
+                            <form method="post" id=""></form>
                         </ul>
                     </li>
                 </ul>
@@ -124,7 +122,6 @@
                 window.location.href = "../login.html";
                 return;
             }
-
             // Mengambil data mahasiswa dari API
             fetch("http://localhost:8000/api/perwalian/d/mahasiswa", {
                 method: "GET",

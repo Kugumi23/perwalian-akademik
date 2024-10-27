@@ -88,30 +88,28 @@
      <div class="container-fluid pt-3 jt-body">
         <h4 class="pb-2"><i class="bi bi-book me-2"></i>Form Janji Temu</h4>
         <div class="container-fluid p-4 bg-light shadow jt-form">
-            <form id="janjiTemuForm" action="proses_janji_temu" method="post" onsubmit="return confirmSubmit()">
+            <form id="janjiTemuForm" method="post">
                 <div class="row mb-3 mt-4">
                     <div class="col-6">
                         <div class="input-group">
                             <span class="input-group-text">Nama</span>
-                            <select class="form-select" placeholder="pilih mahasiswa">
-                                <option value="nama_mahasiswa1">Mahasiswa1</option>
-                                <option value="nama_mahasiswa2">Mahasiswa2</option>
-                                <option value="nama_mahasiswa3">Mahasiswa3</option>
+                            <select class="form-select" id="namaMahasiswa" name="mahasiswa" onchange="updateNim()">
+                                <!-- Opsi akan diisi secara dinamis oleh JavaScript -->
                             </select>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="input-group">
-                            <span class="input-group-text">Tgl Konsul</span>
-                            <input type="datetime-local" name="datetime" id="datetime" class="form-control" required>
+                            <span class="input-group-text">NIM</span>
+                            <input type="text" class="form-control" id="nim" name="nim" readonly>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-5">
                     <div class="col-6">
                         <div class="input-group">
-                            <span class="input-group-text">NIM</span>
-                            <input type="text" class="form-control" name="nim" required>
+                            <span class="input-group-text">Tgl Konsul</span>
+                            <input type="datetime-local" name="datetime" id="datetime" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-6">
@@ -122,20 +120,111 @@
                     </div>
                 </div>
                 <div class="container-fluid d-flex flex-row pt-2 justify-content-end mt-3 mb-2">
-                    <button type="submit" class="btn btn-success me-2" name = "simpan">Simpan<i class="bi bi-save ms-2"></i></button>
+                    <button type="submit" class="btn btn-success me-2" name="simpan">Simpan<i class="bi bi-save ms-2"></i></button>
                     <button type="reset" class="btn btn-danger">Bersihkan<i class="bi bi-trash ms-2"></i></button>
                 </div>
             </form>
         </div>
      </div>
-     <!-- Tambahkan JavaScript untuk konfirmasi -->
-     <script>
-        function confirmSubmit() {
-            return confirm("Apakah Anda yakin ingin menyimpan data ini?");
+    <script>
+    // Periksa apakah token ada di localStorage atau sessionStorage
+    var token = localStorage.getItem('token'); // Atau sessionStorage jika diperlukan
+
+    // Jika token tidak ditemukan, arahkan ke halaman login
+    if (!token) {
+        alert("Anda harus login terlebih dahulu.");
+        window.location.href = "../login.php";
+    }
+
+    // Fungsi untuk mengambil data mahasiswa bimbingan dari API
+    function fetchMahasiswaBimbingan() {
+        fetch("http://127.0.0.1:8000/api/perwalian/d/mahasiswa", {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token  // Sertakan token jika API memerlukan autentikasi
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                const mahasiswaSelect = document.getElementById('namaMahasiswa');
+                mahasiswaSelect.innerHTML = "";
+                data.data.mahasiswa.forEach(mhs => {
+                    const option = document.createElement("option");
+                    option.value = mhs.nim;
+                    option.textContent = mhs.nama;
+                    option.setAttribute("data-nim", mhs.nim); // Menyimpan NIM sebagai data attribute
+                    mahasiswaSelect.appendChild(option);
+                });
+            } else {
+                alert("Gagal mengambil data mahasiswa.");
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching data:", error);
+        });
+    }
+
+    // Fungsi untuk memperbarui NIM berdasarkan nama mahasiswa yang dipilih
+    function updateNim() {
+        const mahasiswaSelect = document.getElementById('namaMahasiswa');
+        const nimInput = document.getElementById('nim');
+        const selectedOption = mahasiswaSelect.options[mahasiswaSelect.selectedIndex];
+        nimInput.value = selectedOption.getAttribute("data-nim"); // Mengambil NIM dari data attribute
+    }
+
+    // Fungsi untuk submit janji temu
+    function submitJanjiTemu(event) {
+        event.preventDefault();  // Mencegah refresh halaman
+
+        // Ambil data dari form
+        const nim = document.getElementById('nim').value; // Ambil NIM dari input
+    const tanggal = document.getElementById("datetime").value; // Pastikan ini mengandung tanggal
+    const materi = document.getElementsByName("materi")[0].value;
+
+        // Siapkan data untuk dikirim ke API
+        const data = {
+        nim: nim,            // Pastikan ini sesuai dengan field yang diharapkan oleh API
+        tanggal: tanggal,    // Pastikan nama field ini sesuai
+        materi: materi       // Pastikan nama field ini sesuai
+    };
+
+        // Kirim data ke API
+    fetch("http://127.0.0.1:8000/api/perwalian/d/janjitemu/tambah", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Janji temu berhasil disimpan.");
+        } else {
+            alert("Gagal menyimpan janji temu.");
         }
-     </script>
+    })
+    .catch(error => {
+        console.error("Error submitting form:", error);
+    });
+}
+
+    // Event listener untuk form submit
+    document.getElementById("janjiTemuForm").addEventListener("submit", submitJanjiTemu);
+
+    // Panggil fungsi fetchMahasiswaBimbingan saat halaman dimuat
+    window.onload = fetchMahasiswaBimbingan;
+
+    </script>
      <script src="../login-u/logout.js"></script>
      <script src="../login-u/user-id-show.js"></script>
-     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <title>BSPAM Online : Janji Temu</title>
+    <script src="../login-u/session_start.js"></script>
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
@@ -67,12 +68,13 @@
                  <ul class="navbar-nav flex-row d-flex ms-auto">
                     <li class="nav-item dropdown"> 
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            Nama_dosen
-                            <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
+                            <span id="user-id-show"></span>
+                            <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-right: 2px; margin-left: 3px;" class="rounded-pill">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Pengaturan</a></li>
-                            <li><a href="#" class="dropdown-item">Keluar</a></li>
+                            <form method="post" id="logout">
+                                <button type="submit" class="btn btn-sm">Keluar</button>
+                            </form>
                         </ul>
                     </li>
                  </ul>
@@ -126,13 +128,14 @@
             </form>
         </div>
      </div>
-
      <!-- Tambahkan JavaScript untuk konfirmasi -->
      <script>
         function confirmSubmit() {
             return confirm("Apakah Anda yakin ingin menyimpan data ini?");
         }
      </script>
+     <script src="../login-u/logout.js"></script>
+     <script src="../login-u/user-id-show.js"></script>
      <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

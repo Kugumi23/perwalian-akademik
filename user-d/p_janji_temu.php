@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <title>BSPAM Online : Permintaan Janji Temu</title>
+    <script src="../login-u/session_start.js"></script>
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
@@ -53,6 +54,7 @@
                  <ul class="navbar-nav">
                     <button type="button" class="btn" data-bs-toggle="offcanvas" data-bs-target="#canvas">
                         <span class="navbar-toggler-icon"></span>
+                        
                     </button>
                  </ul>
                  <ul class="navbar-nav">
@@ -63,7 +65,7 @@
                  <ul class="navbar-nav flex-row d-flex ms-auto">
                     <li class="nav-item dropdown"> 
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            Nama_dosen
+                            <span id="id-show"></span>
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
                         </a>
                         <ul class="dropdown-menu">

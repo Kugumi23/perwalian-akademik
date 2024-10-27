@@ -20,6 +20,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
         .then((data) => {
             if (data.success) {
                 localStorage.setItem('token', data.data.token);
+                localStorage.setItem('id', data.data.id);
                 // Cek role pengguna
                 switch (data.data.role) {
                     case "staff":
@@ -29,7 +30,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
                         window.location.href = "../user-d/data_mahasiswa.php"; // Ganti dengan URL dashboard dosen
                         break;
                     case "mahasiswa":
-                        window.location.href = "../user-m/beranda.html"; // Ganti dengan URL dashboard mahasiswa
+                        window.location.href = "../user-m/beranda.php"; // Ganti dengan URL dashboard mahasiswa
                         break;
                     default:
                         alert("Role tidak dikenali");

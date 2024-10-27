@@ -4,22 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <title>BSPAM Online : Konsultasi</title>
+    <script src="../login-u/session_start.js"></script>
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
             background-image: url('picture/bg_main.jpg');
         }
-
         .dk-body {
             padding-left: 60px;
             padding-right: 60px;
         }
     </style>
 </head>
-
 <body>
     <!-- Menu sidebar -->
     <div class="offcanvas offcanvas-start" id="canvas">
@@ -65,12 +64,12 @@
                 <ul class="navbar-nav flex-row d-flex ms-auto">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            Nama_dosen
-                            <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
+                            <span id="id-show"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Pengaturan</a></li>
-                            <li><a href="#" class="dropdown-item" onclick="logout()">Keluar</a></li>
+                            <form method="post" id="logout">
+                                <button type="submit" class="btn btn-sm">Keluar</button>
+                            </form>
                         </ul>
                     </li>
                 </ul>
@@ -102,6 +101,7 @@
                     </tr>
                 </thead>
                 <tbody id="konsultasi-table-body">
+                    
                 </tbody>
             </table>
         </div>
@@ -113,7 +113,7 @@
             // Jika token tidak ditemukan, arahkan ke halaman login
             if (!token) {
                 alert("Anda harus login terlebih dahulu.");
-                window.location.href = "../login.php";
+                window.location.href = "../login-u/login.php";
                 return;
             }
 
@@ -153,12 +153,7 @@
                     alert("Terjadi kesalahan saat memuat data konsultasi.");
                 });
         });
-
-        // Fungsi untuk logout
-        function logout() {
-            localStorage.removeItem('token'); // Hapus token dari localStorage
-            alert("Anda telah keluar.");
-            window.location.href = "../login.php"; // Arahkan ke halaman login
-        }
     </script>
+    <script src="../login-u/user-id-show.js"></script>
+    <script src="../login-u/logout.js"></script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

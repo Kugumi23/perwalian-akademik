@@ -79,7 +79,7 @@
                             </button>
                             <div class="text-center text-danger mt-5">
                                 <i class="bi bi-exclamation-circle me-2"></i>Bila anda lupa
-                                username maupun password dari akun anda, <br />anda dapat
+                                username maupun password dari akun anda, <br/>anda dapat
                                 berkonsultasi dengan Staff Admin yang bersangkutan
                             </div>
                         </form>

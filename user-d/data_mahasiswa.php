@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>BSPAM Online : Data Mahasiswa</title>
+    <script src="../login-u/session_start.js"></script>
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
@@ -18,9 +19,7 @@
             padding-right: 60px;
         }
     </style>
-    <script src="../login-u/session_start.js"></script>
 </head>
-
 <body>
     <!-- Menu sidebar -->
     <div class="offcanvas offcanvas-start" id="canvas">
@@ -71,7 +70,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <form action="post" id="logout">
-                                <button type="submit" class="btn btn-sm"><span class="text-center">Keluar</span></button>
+                                <button type="submit" class="btn btn-sm">Keluar</button>
                             </form>
                         </ul>
                     </li>
@@ -99,6 +98,7 @@
             </table>
         </div>
     </div>
+    <script src="../login-u/logout.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const token = localStorage.getItem('token');
@@ -144,19 +144,11 @@
                     alert("Terjadi kesalahan saat memuat data mahasiswa.");
                 });
         });
-
-        // Fungsi untuk logout
-        function logout() {
-            localStorage.removeItem('token'); // Hapus token dari localStorage
-            alert("Anda telah keluar.");
-        }
     </script>
 
     <script src="../login-u/user-id-show.js"></script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        
-    </script>
+    <script src="../login-u/logout.js"></script>
 </body>
 
 </html>

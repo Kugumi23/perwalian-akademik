@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
-            background-image:url("picture/bg_main.jpg");
+            background-image: url("picture/bg_main.jpg");
         }
         .pjt-body {
-            padding-left:60px;
-            padding-right:60px;
+            padding-left: 60px;
+            padding-right: 60px;
         }
     </style>
 </head>
@@ -122,7 +122,7 @@
     </div>
 
     <script>
-       document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function() {
     const token = localStorage.getItem('token');
 
     // Jika token tidak ditemukan, arahkan ke halaman login
@@ -132,8 +132,9 @@
         return;
     }
 
-    // Mengambil data janji temu dari API
-    fetch("http://127.0.0.1:8000/api/perwalian/d/janjitemu", {
+    // Fungsi untuk memuat data janji temu
+    function loadData(filter = "") {
+        fetch("http://127.0.0.1:8000/api/perwalian/d/janjitemu", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -142,26 +143,31 @@
         })
         .then((response) => response.json())
         .then((data) => {
+            console.log(data); // Logging data untuk debugging
+
             if (data.success) {
                 const tableBody = document.getElementById("konsultasi-table-body");
                 tableBody.innerHTML = ""; 
 
                 // Menampilkan data janji temu dalam tabel
                 data.data.forEach((mahasiswa) => {
-                    mahasiswa.janji_temu.forEach((janji) => {
-                        const row = `
-                            <tr>
-                                <td>${mahasiswa.nama}</td>
-                                <td>${mahasiswa.nim}</td>
-                                <td>${new Date(janji.tanggal).toLocaleDateString()} ${new Date(janji.tanggal).toLocaleTimeString()}</td>
-                                <td>${janji.materi}</td>
-                                <td>
-                                    <button class="btn btn-success" onclick="handleApproval('${janji.id}', '${mahasiswa.nim}', '${mahasiswa.nama}', '${mahasiswa.semester}', '${janji.tanggal}', '${janji.materi}')">Setuju</button>
-                                    <button class="btn btn-danger" onclick="handleApproval('${janji.id}', false)">Tolak</button>
-                                </td>
-                            </tr>`;
-                        tableBody.innerHTML += row;
-                    });
+                    // Cek apakah nama sesuai dengan filter pencarian
+                    if (mahasiswa.nama.toLowerCase().includes(filter.toLowerCase())) {
+                        mahasiswa.janji_temu.forEach((janji) => {
+                            const row = `
+                                <tr>
+                                    <td>${mahasiswa.nama}</td>
+                                    <td>${mahasiswa.nim}</td>
+                                    <td>${new Date(janji.tanggal).toLocaleDateString()} ${new Date(janji.tanggal).toLocaleTimeString()}</td>
+                                    <td>${janji.materi}</td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="handleApproval('${janji.id}', '${mahasiswa.nim}', '${mahasiswa.nama}', '${mahasiswa.semester}', '${janji.tanggal}', '${janji.materi}', true)">Setuju</button>
+                                        <button class="btn btn-danger" onclick="handleApproval('${janji.id}', false)">Tolak</button>
+                                    </td>
+                                </tr>`;
+                            tableBody.innerHTML += row;
+                        });
+                    }
                 });
             } else {
                 alert("Gagal memuat data janji temu.");
@@ -171,77 +177,21 @@
             console.error("Error:", error);
             alert("Terjadi kesalahan saat memuat data janji temu.");
         });
+    }
+
+    // Muat data tanpa filter saat halaman dimuat
+    loadData();
+
+    // Tangani pencarian
+    const searchForm = document.getElementById("searchForm");
+    searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const searchValue = document.getElementById("cari").value;
+        loadData(searchValue); // Panggil loadData dengan filter pencarian
+    });
 });
 
-// Fungsi untuk menangani persetujuan atau penolakan
-function handleApproval(id, nim, nama, semester, tanggal, materi, approve) {
-    const token = localStorage.getItem('token');
-    const status = approve ? "accepted" : "rejected";
-
-    // Pertama, update status janji temu
-    fetch(`http://127.0.0.1:8000/api/perwalian/d/janjitemu/${id}`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ status })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            if (status === "accepted") {
-                // Jika disetujui, tambahkan ke data konsultasi
-                addToKonsultasi(nim, nama, semester, tanggal, materi);
-            } else {
-                alert("Permintaan janji temu ditolak.");
-            }
-        } else {
-            alert("Gagal memproses permintaan.");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Terjadi kesalahan dalam memproses permintaan.");
-    });
-}
-
-// Fungsi untuk menambahkan data janji temu ke konsultasi
-function addToKonsultasi(nim, nama, semester, tanggal, materi) {
-    const token = localStorage.getItem('token');
-    
-    fetch("http://127.0.0.1:8000/api/perwalian/d/konsul", {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            nim: nim,
-            nama: nama,
-            semester: semester,
-            tanggal: tanggal,
-            materi: materi
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert("Janji temu berhasil disetujui dan ditambahkan ke data konsultasi.");
-            location.reload(); // Reload halaman untuk update data
-        } else {
-            alert("Gagal menambahkan ke data konsultasi.");
-        }
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Terjadi kesalahan saat menambahkan ke data konsultasi.");
-    });
-}
-
-
     </script>
-
-    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
 </html>

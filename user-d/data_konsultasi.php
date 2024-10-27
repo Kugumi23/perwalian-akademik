@@ -65,6 +65,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
                             <span id="id-show"></span>
+                            <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
                         </a>
                         <ul class="dropdown-menu">
                             <form method="post" id="logout">

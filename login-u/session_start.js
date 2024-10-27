@@ -1,4 +1,4 @@
 const token = localStorage.getItem('token');
 if (!token) {
-    window.location.href = 'login-form.php';
+    window.location.href = '../login-u/login-form.php';
 }

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <title>BSPAM Online : Distribusi KHS</title>
+    <script src="../login-u/session_start.js"></script>
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/upload_khs.css">
 </head>
@@ -77,31 +78,7 @@
         </nav>
     </div>
     <!-- Batas Navigation-Bar -->
-    <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
-    <title>BSPAM Online : Distribusi KHS</title>
-    <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/upload_khs.css">
-    <style>
-        body {
-            background-image: url('picture/bg_main.jpg');
-        }
-        .dk-body {
-            padding-left: 60px;
-            padding-right: 60px;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Sidebar dan Navigasi -->
     <!-- ... (kode sidebar dan navigasi tetap) ... -->
-
     <div class="container mt-5 pt-5">
         <div class="col-md-12">
             <div class="card shadow">
@@ -181,8 +158,8 @@
             });
         });
     </script>
-
+    <script src="../login-u/logout.js"></script>
+    <script src="../login-u/session_start.js"></script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

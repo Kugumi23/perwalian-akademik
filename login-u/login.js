@@ -27,10 +27,10 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
                         window.location.href = "../user-adm/upload_khs.html"; // Ganti dengan URL dashboard admin
                         break;
                     case "dosen":
-                        window.location.href = "../user-d/data_mahasiswa.php"; // Ganti dengan URL dashboard dosen
+                        window.location.href = "../user-d/data_mahasiswa.html"; // Ganti dengan URL dashboard dosen
                         break;
                     case "mahasiswa":
-                        window.location.href = "../user-m/beranda.php"; // Ganti dengan URL dashboard mahasiswa
+                        window.location.href = "../user-m/beranda.html"; // Ganti dengan URL dashboard mahasiswa
                         break;
                     default:
                         alert("Role tidak dikenali");

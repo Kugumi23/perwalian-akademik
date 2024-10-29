@@ -3,5 +3,5 @@ document.getElementById("logout").addEventListener("submit", function(event){
 
     localStorage.removeItem('token');
     localStorage.removeItem('id');
-    window.location.href = "../login-u/login-form.php";
+    window.location.href = "../login-u/login-form.html";
 });

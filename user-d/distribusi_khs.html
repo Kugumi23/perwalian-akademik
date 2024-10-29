@@ -17,7 +17,6 @@
             padding-left:60px;
             padding-right:60px;
         }
-
 </style>
 <body>
     <div class="offcanvas offcanvas-start" id="mycanvas">
@@ -27,23 +26,44 @@
         </div>
         <div class="offcanvas-body sides">
             <div class="container-fluid">
-                <?php
-                    include ("dashboard1.php");
-                    echo "<br>";
-                    include ("dashboard2.php");
-                    echo "<br>";
-                    include ("dashboard3.php");
-                ?>
+                <!-- Dashboar banyak permintaan SO -->
+                <div class="container-fluid main text-bg-primary pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
+                    <div class="container d-flex flex-row">
+                        <div>
+                            <h2>0</h2>
+                        </div>
+                        <div class="ms-auto">
+                            <h2><i class="bi bi-columns"></i></h2>
+                        </div>
+                    </div>
+                    <div class="container d-flex justify-content-start">
+                        <Span>Jumlah Permintaan SO</Span>
+                    </div>    
+                </div>
+                <!-- Dashboard banyak permintaan janji temu -->
+                <div class="container-fluid main text-bg-warning pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
+                    <div class="container d-flex flex-row">
+                        <div>
+                            <h2>0</h2>
+                        </div>
+                        <div class="ms-auto">
+                            <h2><i class="bi bi-calendar3-event"></i></h2>
+                        </div>
+                    </div>
+                    <div class="container d-flex justify-content-start">
+                        <Span>Jumlah Permintaan Janji Temu</Span>
+                    </div>    
+                </div>
             </div>
             <div class="container-fluid" style="font-size:12px;">
                 <hr>
                 <span>MENU</span>
                 <hr>
             </div>
-            <a href="data_mahasiswa.php" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
-            <a href="data_konsultasi.php" class="nav-link pt-3 pb-3">Data Konsultasi</a>
-            <a href="distribusi_khs.php" class="nav-link active pt-3 pb-3 text-light activated">Distribusi KHS</a>
-            <a href="permintaan_so.php" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
+            <a href="data_mahasiswa.html" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
+            <a href="data_konsultasi.html" class="nav-link pt-3 pb-3">Data Konsultasi</a>
+            <a href="distribusi_khs.html" class="nav-link active pt-3 pb-3 text-light activated">Distribusi KHS</a>
+            <a href="permintaan_so.html" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
 
         </div>
     </div>
@@ -65,12 +85,11 @@
                 <ul class="navbar-nav d-flex flex-row ms-auto">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            Nama_dosen
+                            <span id="id-show"></span>
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-right: 2px; margin-left: 3px;" class="rounded-pill">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Pengaturan</a></li>
-                            <li><a href="#" class="dropdown-item">Keluar</a></li>
+                            <form method="post" id=""></form>
                         </ul>
                     </li>
                 </ul>
@@ -124,7 +143,6 @@
                 window.location.href = "../login.html";
                 return;
             }
-
             // Mengambil data mahasiswa dari API
             fetch("http://localhost:8000/api/perwalian/d/mahasiswa", {
                 method: "GET",
@@ -159,7 +177,7 @@
         });
     </script>
     <script src="../login-u/logout.js"></script>
-    <script src="../login-u/session_start.js"></script>
+    <script src="../login-u/user-id-show.js"></script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

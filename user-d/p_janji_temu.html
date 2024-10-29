@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,13 +12,17 @@
     <style>
         body {
             background-image: url("picture/bg_main.jpg");
+            background-size: cover; /* Menambahkan background-size */
+            background-attachment: fixed; /* Menjaga latar belakang tetap saat scroll */
         }
+
         .pjt-body {
             padding-left: 60px;
             padding-right: 60px;
         }
     </style>
 </head>
+
 <body>
     <!-- Menu sidebar -->
     <div class="offcanvas offcanvas-start" id="canvas">
@@ -27,7 +32,6 @@
         </div>
         <div class="offcanvas-body sides">
             <div class="container-fluid">
-                <!-- Dashboard banyak permintaan SO -->
                 <div class="container-fluid main text-bg-primary pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
                     <div class="container d-flex flex-row">
                         <div>
@@ -39,9 +43,8 @@
                     </div>
                     <div class="container d-flex justify-content-start">
                         <span>Jumlah Permintaan SO</span>
-                    </div>    
+                    </div>
                 </div>
-                <!-- Dashboard banyak permintaan janji temu -->
                 <div class="container-fluid main text-bg-warning pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
                     <div class="container d-flex flex-row">
                         <div>
@@ -53,7 +56,7 @@
                     </div>
                     <div class="container d-flex justify-content-start">
                         <span>Jumlah Permintaan Janji Temu</span>
-                    </div>    
+                    </div>
                 </div>
             </div>
             <div class="container-fluid" style="font-size:12px;">
@@ -164,85 +167,100 @@
                 fetch("https://apiteam.v-project.my.id/api/perwalian/d/janjitemu", {
                     method: "POST",
                     headers: {
-                        Authorization: `Bearer ${token}`,
+                        'Authorization': `Bearer ${token}`, // Menggunakan backticks
                         "Content-Type": "application/json",
                     },
                 })
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.json();
-                    })
-                    .then((data) => {
-                        console.log(data); // Logging data untuk debugging
-
-                        if (data.success) {
-                            const tableBody = document.getElementById("konsultasi-table-body");
-                            tableBody.innerHTML = "";
-
-                            // Menampilkan data janji temu dalam tabel
-                            data.data.forEach((mahasiswa) => {
-                                if (mahasiswa.nama.toLowerCase().includes(filter.toLowerCase())) {
-                                    mahasiswa.janji_temu.forEach((janji) => {
-                                        const row = 
-                                            `<tr>
-                                                <td>${mahasiswa.nama}</td>
-                                                <td>${mahasiswa.nim}</td>
-                                                <td>${new Date(janji.tanggal).toLocaleString()}</td>
-                                                <td>${janji.materi}</td>
-                                                <td>
-                                                    <button class="btn btn-success" onclick="handleApproval('${janji.id}', '${mahasiswa.nama}')">Setujui</button>
-                                                    <button class="btn btn-danger" onclick="handleRejection('${janji.id}', '${mahasiswa.nama}')">Tolak</button>
-                                                </td>
-                                            </tr>`;
-                                        tableBody.insertAdjacentHTML('beforeend', row);
-                                    });
-                                }
-                            });
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Error fetching data:', error);
-                    });
-            }
-
-            // Fungsi untuk menangani penanganan persetujuan janji temu
-            window.handleApproval = function (id, nama) {
-                const token = localStorage.getItem("token");
-                fetch(`https://apiteam.v-project.my.id/api/perwalian/d/janjitemu/${id}/approve`, {
-                    method: "POST",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                    return response.json();
                 })
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok ' + response.statusText);
-                        }
-                        return response.json();
-                    })
-                    .then((data) => {
-                        if (data.success) {
-                            alert(`Janji temu untuk ${nama} telah disetujui.`);
-                            loadData(); // Memuat ulang data setelah persetujuan
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Error approving appointment:', error);
-                    });
-            };
+                .then((data) => {
+                    console.log(data); // Logging data untuk debugging
 
-            // Pencarian form submit
-            const searchForm = document.getElementById("searchForm");
-            searchForm.addEventListener("submit", function (e) {
-                e.preventDefault(); // Mencegah reload halaman
-                const searchInput = document.getElementById("cari").value;
-                loadData(searchInput); // Memuat data dengan filter pencarian
+                    if (data.success) {
+                        const tableBody = document.getElementById("konsultasi-table-body");
+                        tableBody.innerHTML = ""; // Bersihkan isi tabel
+
+                        // Menampilkan data janji temu dalam tabel
+                        data.data.forEach((mahasiswa) => {
+    if (mahasiswa.nama.toLowerCase().includes(filter.toLowerCase())) {
+        mahasiswa.janji_temu.forEach((janji) => {
+            const rowId = 'janji-' + janji.id; // ID unik untuk setiap baris
+            const row =
+                '<tr id="' + rowId + '">' + // Menambahkan id ke baris
+                    '<td>' + mahasiswa.nama + '</td>' +
+                    '<td>' + mahasiswa.nim + '</td>' +
+                    '<td>' + new Date(janji.tanggal).toLocaleString() + '</td>' +
+                    '<td>' + janji.materi + '</td>' +
+                    '<td>' +
+                        '<button class="btn btn-success" onclick="handleApproval(\'' + janji.id + '\', \'' + mahasiswa.nama + '\', \'' + mahasiswa.nim + '\', \'' + rowId + '\')">Setujui</button>' +
+                        '<button class="btn btn-danger" onclick="handleApproval(\'' + janji.id + '\', \'' + mahasiswa.nama + '\')">Tolak</button>' +
+                    '</td>' +
+                '</tr>';
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+});
+
+                    } else {
+                        alert(`Gagal memuat data: ${data.message}`);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Ada kesalahan:', error);
+                });
+            }
+            async function meong(id, nama, nim) {
+              const formData = new FormData();
+              formData.append('setujui', id);
+              fetch("https://apiteam.v-project.my.id/api/perwalian/d/janjitemu", {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: formData
+                })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    if (data.success) {
+                        alert('Janji temu berhasil disetujui!');
+                        loadData(); // Reload data setelah berhasil
+                    } else {
+                        alert(`Gagal menyetujui janji temu: ${data.message}`);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Ada kesalahan:', error);
+                });
+            }
+            // Fungsi untuk menyetujui atau menolak janji temu
+           window.handleApproval = function (id, nama, nim, rowId) {
+    const action = confirm(`Apakah Anda yakin ingin menyetujui janji temu ${nama} (NIM: ${nim})?`);
+    if (action) {
+        meong(id, nama, nim, rowId); // Mengirim rowId ke fungsi meong
+    }
+};
+
+
+            // Menggunakan event listener untuk form pencarian
+            document.getElementById('searchForm').addEventListener('submit', function (e) {
+                e.preventDefault(); // Mencegah pengiriman form default
+                const searchValue = document.getElementById('cari').value;
+                loadData(searchValue); // Memuat data dengan filter pencarian
             });
 
-            loadData(); // Memuat data saat halaman pertama kali dibuka
+            loadData(); // Memuat data saat halaman dimuat
         });
     </script>
 </body>
+
 </html>

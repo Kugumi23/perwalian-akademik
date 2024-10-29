@@ -118,7 +118,7 @@
             }
 
             // Mengambil data konsultasi dari API
-            fetch("http://127.0.0.1:8000/api/perwalian/d/konsul", {
+            fetch("https://apiteam.v-project.my.id/api/perwalian/d/konsul", {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,

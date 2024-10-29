@@ -194,7 +194,7 @@
     };
 
         // Kirim data ke API
-    fetch("http://127.0.0.1:8000/api/perwalian/d/janjitemu/tambah", {
+    fetch("https://apiteam.v-project.my.id/api/perwalian/d/janjitemu/tambah", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -224,4 +224,4 @@
     </script>
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+</html> 

@@ -82,7 +82,7 @@
     <div class="container-fluid pt-2 pjt-body">
         <div class="container-fluid d-flex flex-row">
             <h4>Permintaan Janji Temu</h4>
-            <form action="" method="post" class="d-flex flex-row ms-auto">
+            <form action="" method="post" class="d-flex flex-row ms-auto" id="searchForm">
                 <div class="row">
                     <div class="col-5">
                         <select class="form-select me-2" name="cell" id="cell">
@@ -123,75 +123,100 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-    const token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
 
-    // Jika token tidak ditemukan, arahkan ke halaman login
-    if (!token) {
-        alert("Anda harus login terlebih dahulu.");
-        window.location.href = "../login.php";
-        return;
-    }
-
-    // Fungsi untuk memuat data janji temu
-    function loadData(filter = "") {
-        fetch("http://127.0.0.1:8000/api/perwalian/d/janjitemu", {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
+            // Jika token tidak ditemukan, arahkan ke halaman login
+            if (!token) {
+                alert("Anda harus login terlebih dahulu.");
+                window.location.href = "../login.php";
+                return;
             }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data); // Logging data untuk debugging
 
-            if (data.success) {
-                const tableBody = document.getElementById("konsultasi-table-body");
-                tableBody.innerHTML = ""; 
-
-                // Menampilkan data janji temu dalam tabel
-                data.data.forEach((mahasiswa) => {
-                    // Cek apakah nama sesuai dengan filter pencarian
-                    if (mahasiswa.nama.toLowerCase().includes(filter.toLowerCase())) {
-                        mahasiswa.janji_temu.forEach((janji) => {
-                            const row = `
-                                <tr>
-                                    <td>${mahasiswa.nama}</td>
-                                    <td>${mahasiswa.nim}</td>
-                                    <td>${new Date(janji.tanggal).toLocaleDateString()} ${new Date(janji.tanggal).toLocaleTimeString()}</td>
-                                    <td>${janji.materi}</td>
-                                    <td>
-                                        <button class="btn btn-success" onclick="handleApproval('${janji.id}', '${mahasiswa.nim}', '${mahasiswa.nama}', '${mahasiswa.semester}', '${janji.tanggal}', '${janji.materi}', true)">Setuju</button>
-                                        <button class="btn btn-danger" onclick="handleApproval('${janji.id}', false)">Tolak</button>
-                                    </td>
-                                </tr>`;
-                            tableBody.innerHTML += row;
-                        });
+            // Fungsi untuk memuat data janji temu
+            function loadData(filter = "") {
+                fetch("https://apiteam.v-project.my.id/api/perwalian/d/janjitemu", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
                     }
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data); // Logging data untuk debugging
+
+                    if (data.success) {
+                        const tableBody = document.getElementById("konsultasi-table-body");
+                        tableBody.innerHTML = ""; 
+
+                        // Menampilkan data janji temu dalam tabel
+                        data.data.forEach((mahasiswa) => {
+                            // Cek apakah nama sesuai dengan filter pencarian
+                            if (mahasiswa.nama.toLowerCase().includes(filter.toLowerCase())) {
+                                mahasiswa.janji_temu.forEach((janji) => {
+                                    const row = `
+                                        <tr>
+                                            <td>${mahasiswa.nama}</td>
+                                            <td>${mahasiswa.nim}</td>
+                                            <td>${new Date(janji.tanggal).toLocaleDateString()} ${new Date(janji.tanggal).toLocaleTimeString()}</td>
+                                            <td>${janji.materi}</td>
+                                            <td>
+                                                <button class="btn btn-success" onclick="handleApproval('${janji.id}', '${mahasiswa.nim}', '${mahasiswa.nama}', '${mahasiswa.semester}', '${janji.tanggal}', '${janji.materi}', true)">Setuju</button>
+                                                <button class="btn btn-danger" onclick="handleApproval('${janji.id}', false)">Tolak</button>
+                                            </td>
+                                        </tr>`;
+                                    tableBody.innerHTML += row;
+                                });
+                            }
+                        });
+                    } else {
+                        alert("Gagal memuat data janji temu.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Terjadi kesalahan saat memuat data janji temu.");
                 });
-            } else {
-                alert("Gagal memuat data janji temu.");
             }
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            alert("Terjadi kesalahan saat memuat data janji temu.");
+
+            // Fungsi untuk menangani persetujuan
+            function handleApproval(janjiId, nim, nama, semester, tanggal, materi, isApproved) {
+                const url = isApproved ? "https://apiteam.v-project.my.id/api/perwalian/d/konsul" : "https://apiteam.v-project.my.id/api/perwalian/d/tolak"; // Sesuaikan dengan endpoint tolak jika perlu
+
+                fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: janjiId,
+                        nim: nim,
+                        nama: nama,
+                        semester: semester,
+                        tanggal: tanggal,
+                        materi: materi,
+                        status: isApproved ? 'disetujui' : 'ditolak'
+                    })
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert(isApproved ? "Janji temu berhasil disetujui." : "Janji temu berhasil ditolak.");
+                        loadData(); // Refresh data setelah persetujuan
+                    } else {
+                        alert("Gagal memproses persetujuan.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert("Terjadi kesalahan saat memproses persetujuan.");
+                });
+            }
+
+            // Memuat data saat halaman dimuat
+            loadData();
         });
-    }
-
-    // Muat data tanpa filter saat halaman dimuat
-    loadData();
-
-    // Tangani pencarian
-    const searchForm = document.getElementById("searchForm");
-    searchForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-        const searchValue = document.getElementById("cari").value;
-        loadData(searchValue); // Panggil loadData dengan filter pencarian
-    });
-});
-
     </script>
-    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
 </html>

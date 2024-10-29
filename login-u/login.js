@@ -6,7 +6,7 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     const password = document.getElementById('password').value;
 
     // Lakukan fetch ke API
-    fetch("http://localhost:8000/api/login", {
+    fetch("https://apiteam.v-project.my.id/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

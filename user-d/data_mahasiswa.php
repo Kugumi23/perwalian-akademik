@@ -111,7 +111,7 @@
             }
 
             // Mengambil data mahasiswa dari API
-            fetch("http://localhost:8000/api/perwalian/d/mahasiswa", {
+            fetch("https://apiteam.v-project.my.id/api/perwalian/d/mahasiswa", {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,

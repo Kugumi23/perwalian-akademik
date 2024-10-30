@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>BSPAM Online : Data Mahasiswa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSPAM Online : Konsultasi</title>
     <script src="../login-u/session_start.js"></script>
     <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="style/style.css">
@@ -13,8 +12,7 @@
         body {
             background-image: url('picture/bg_main.jpg');
         }
-
-        .dm-body {
+        .dk-body {
             padding-left: 60px;
             padding-right: 60px;
         }
@@ -29,42 +27,15 @@
         </div>
         <div class="offcanvas-body sides">
             <div class="container-fluid">
-                <!-- Dashboar banyak permintaan SO -->
-                <div class="container-fluid main text-bg-primary pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
-                    <div class="container d-flex flex-row">
-                        <div>
-                            <h2>0</h2>
-                        </div>
-                        <div class="ms-auto">
-                            <h2><i class="bi bi-columns"></i></h2>
-                        </div>
-                    </div>
-                    <div class="container d-flex justify-content-start">
-                        <Span>Jumlah Permintaan SO</Span>
-                    </div>    
-                </div>
-                <!-- Dashboard banyak permintaan janji temu -->
-                <div class="container-fluid main text-bg-warning pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
-                    <div class="container d-flex flex-row">
-                        <div>
-                            <h2>0</h2>
-                        </div>
-                        <div class="ms-auto">
-                            <h2><i class="bi bi-calendar3-event"></i></h2>
-                        </div>
-                    </div>
-                    <div class="container d-flex justify-content-start">
-                        <Span>Jumlah Permintaan Janji Temu</Span>
-                    </div>    
-                </div>
+                
             </div>
             <div class="container-fluid" style="font-size:12px;">
                 <hr>
                 <span>MENU</span>
                 <hr>
             </div>
-            <a href="data_mahasiswa.html" class="nav-link active pt-3 pb-3 text-light activated">Data Mahasiswa</a>
-            <a href="data_konsultasi.html" class="nav-link pt-3 pb-3">Data Konsultasi</a>
+            <a href="data_mahasiswa.html" class="nav-link pt-3 pb-3">Data Mahasiswa</a>
+            <a href="data_konsultasi.html" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi</a>
             <a href="distribusi_khs.html" class="nav-link pt-3 pb-3">Distribusi KHS</a>
             <a href="permintaan_so.html" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
         </div>
@@ -80,17 +51,16 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">Data Mahasiswa</a>
+                        <a href="#" class="nav-link active">Data Konsultasi</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav flex-row d-flex ms-auto">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            <span class="me-2" id="id-show"></span>
-                            <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-left:2px; margin-right:2px;">
+                            <span id="id-show"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <form action="post" id="logout">
+                            <form method="post" id="logout">
                                 <button type="submit" class="btn btn-sm">Keluar</button>
                             </form>
                         </ul>
@@ -100,26 +70,35 @@
         </nav>
     </div>
     <!-- Batas Navigation-Bar -->
-    <div class="container-fluid pt-5 dm-body">
+    <div class="container-fluid pt-5 dk-body">
         <div class="container-fluid pt-5">
-            <h4>Data Mahasiswa Bimbingan</h4>
+            <div class="container-fluid flex-row d-flex pb-2">
+                <h4>Data Konsultasi Mahasiswa</h4>
+                <button type="button" class="btn btn-success shadow ms-auto">
+                    <a href="janji_temu.php" class="nav-link text-light"><i class="bi bi-plus me-1"></i>Buat Janji</a>
+                </button>
+                <button type="button" class="btn btn-primary shadow ms-2">
+                    <a href="p_janji_temu.php" class="nav-link text-light"><i class="bi bi-book me-2"></i>Permintaan janji temu</a>
+                </button>
+            </div>
             <table class="table table-striped">
                 <thead class="table-danger">
                     <tr>
                         <th>No</th>
                         <th>NIM</th>
                         <th>Nama Mahasiswa</th>
-                        <th>No. Telp</th>
+                        <th>Kelas</th>
                         <th>Semester</th>
+                        <th>Tanggal Konsultasi</th>
+                        <th>Materi</th>
                     </tr>
                 </thead>
-                <tbody id="table-body">
-            
+                <tbody id="konsultasi-table-body">
+                    
                 </tbody>
             </table>
         </div>
     </div>
-    <script src="../login-u/logout.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const token = localStorage.getItem('token');
@@ -127,12 +106,12 @@
             // Jika token tidak ditemukan, arahkan ke halaman login
             if (!token) {
                 alert("Anda harus login terlebih dahulu.");
-                window.location.href = "../login.html";
+                window.location.href = "../login-u/login.php";
                 return;
             }
 
-            // Mengambil data mahasiswa dari API
-            fetch("https://apiteam.v-project.my.id/api/perwalian/d/mahasiswa", {
+            // Mengambil data konsultasi dari API
+            fetch("https://apiteam.v-project.my.id/api/perwalian/d/konsul", {
                     method: "GET",
                     headers: {
                         "Authorization": `Bearer ${token}`,
@@ -142,34 +121,32 @@
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        const tableBody = document.getElementById("table-body");
-                        tableBody.innerHTML = ""; // Kosongkan tabel jika ada data lama
+                        const tableBody = document.getElementById("konsultasi-table-body");
+                        tableBody.innerHTML = ""; 
 
-                        // Menampilkan data mahasiswa dalam tabel
-                        data.data.mahasiswa.forEach((mahasiswa, index) => {
+                        // Menampilkan data konsultasi dalam tabel
+                        data.data.forEach((item, index) => {
                             const row = `<tr>
                                         <td>${index + 1}</td>
-                                        <td>${mahasiswa.nim}</td>
-                                        <td>${mahasiswa.nama}</td>
-                                        <td>${mahasiswa.no_hp}</td>
-                                        <td>${mahasiswa.semester}</td>
+                                        <td>${item.nim}</td>
+                                        <td>${item.mahasiswa.nama}</td>
+                                        <td>${item.mahasiswa.kelas.abjad_kelas}</td>
+                                        <td>${item.mahasiswa.semester}</td>
+                                        <td>${new Date(item.tanggal).toLocaleDateString()}</td>
+                                        <td>${item.materi}</td>
                                     </tr>`;
                             tableBody.innerHTML += row;
                         });
                     } else {
-                        alert("Gagal memuat data mahasiswa.");
+                        alert("Gagal memuat data konsultasi.");
                     }
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    alert("Terjadi kesalahan saat memuat data mahasiswa.");
+                    alert("Terjadi kesalahan saat memuat data konsultasi.");
                 });
         });
     </script>
-
     <script src="../login-u/user-id-show.js"></script>
-    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../login-u/logout.js"></script>
-</body>
-
-</html>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -22,7 +22,8 @@ document
         .then((data) => {
             if (data.success) {
                 localStorage.setItem('token', data.data.token);
-                localStorage.setItem('id', data.data.id);
+                localStorage.setItem('id', id)
+
                 // Cek role pengguna
                 switch (data.data.role) {
                     case "staff":

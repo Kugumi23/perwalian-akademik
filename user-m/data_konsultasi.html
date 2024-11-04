@@ -43,12 +43,13 @@
                 <ul class="navbar-nav d-flex flex-row ms-auto">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-                            Nama_mahasiswa
+                            <span id="id-show"></span>
                             <img src="picture/profile.png" alt="Foto profil" style="width:24px; margin-right: 2px; margin-left: 3px;" class="rounded-pill">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#" class="dropdown-item">Pengaturan</a></li>
-                            <li><a href="#" class="dropdown-item">Keluar</a></li>
+                            <form method="post" id="logout">
+                                <button type="submit" class="btn btn-sm">Keluar</button>
+                            </form>
                         </ul>
                     </li>
                 </ul>
@@ -57,28 +58,44 @@
     </div>
     
     <div class="container-fluid pt-5 jt-body">
+<<<<<<< HEAD
         <h4 class="ps-3">Jadwal Konsultasi dan Janji Temu</h4>
         <div class="container-fluid pt-4">
             <p class="text-warning">Perhatian: Anda dapat mengajukan janji temu yang nantinya akan ditampilkan di dalam <b>Jadwal Konsultasi Mahasiswa</b>. Proses ini melibatkan mahasiswa dan dosen pembimbing, dan tidak semua janji temu akan masuk ke tabel jadwal jika tidak disetujui oleh dosen pembimbing.</p>
             
             <!-- Tabel gabungan untuk Konsultasi dan Janji Temu -->
             <h5>Data Konsultasi & Janji Temu</h5>
+=======
+        <h4 class="ps-3">Jadwal Konsultasi Mahasiswa</h4>
+        <div class="container-fluid pt-4">
+            <p class="text-warning">Perhatian: Anda dapat mengajukan janji temu yang nantinya akan ditampilkan di dalam <b>Jadwal Konsultasi Mahasiswa</b>. Proses ini melibatkan mahasiswa dan dosen pembimbing, dan tidak semua janji temu akan masuk ke tabel jadwal jika tidak disetujui oleh dosen pembimbing.</p>
+>>>>>>> 4c94b20c1b9a4f1712517fde5f6288a8a80cd2da
             <table class="table table-striped">
                 <thead>
                     <tr class="table-danger">
                         <th>Nama</th>
                         <th>NIM</th>
+<<<<<<< HEAD
                         <th>Tanggal</th>
                         <th>Materi</th>
                     </tr>
                 </thead>
                 <tbody id="jadwalGabunganBody">
                     <!-- Data konsultasi dan janji temu akan dimasukkan di sini -->
+=======
+                        <th>Tanggal/waktu bimbingan</th>
+                        <th>Materi</th>
+                    </tr>
+                </thead>
+                <tbody id="jadwalKonsultasiBody">
+                <!-- Data akan ditambahkan di sini -->
+>>>>>>> 4c94b20c1b9a4f1712517fde5f6288a8a80cd2da
                 </tbody>
             </table>
         </div>
     </div>
 
+<<<<<<< HEAD
     <script>
         // Ambil token dari localStorage
         var token = localStorage.getItem('token'); 
@@ -156,9 +173,85 @@
             fetchDataGabungan();
         };
     </script>
+=======
+<script>
 
+    // Fungsi untuk mengambil data janji temu dari API
+    function fetchJadwalKonsultasi() {
+    // Ambil token dari localStorage
+    var token = localStorage.getItem('token'); 
+    console.log("Token yang digunakan:", token); // Log token yang digunakan
 
+    // Pastikan token ada
+    if (!token) {
+        alert("Anda harus login terlebih dahulu.");
+        window.location.href = "../login.php";
+        return; // Keluar dari fungsi jika tidak ada token
+    }
+
+    // Ambil data janji temu dari API
+    fetch("https://apiteam.v-project.my.id/api/perwalian/m/janjitemu", {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token // Otorisasi menggunakan token
+        }
+    })
+    .then(response => {
+        // Periksa apakah respon dari server ok
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json(); // Konversi respons ke JSON
+    })
+    .then(data => {
+        console.log('Parsed Data:', data); // Log seluruh data yang diterima dari API
+>>>>>>> 4c94b20c1b9a4f1712517fde5f6288a8a80cd2da
+
+        if (data.success) {
+            const tbody = document.getElementById('jadwalKonsultasiBody');
+            tbody.innerHTML = ""; // Kosongkan tabel sebelum diisi
+
+<<<<<<< HEAD
                 <!-- form janji temu -->
+=======
+            // Mengambil data mahasiswa
+            const mhs = data.data;
+            console.log('Data Mahasiswa:', mhs); // Log data mahasiswa
+
+            if (mhs.janji_temu && Array.isArray(mhs.janji_temu)) {
+                mhs.janji_temu.forEach(janji => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${mhs.nama}</td>
+                        <td>${mhs.nim}</td>
+                        <td>${janji.tanggal}</td>
+                        <td>${janji.materi ? janji.materi : 'Tidak ada materi'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } else {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="4">Tidak ada janji temu yang tersedia</td>`;
+                tbody.appendChild(row);
+            }
+        } else {
+            alert("Gagal mengambil data janji temu.");
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching data:", error); // Log error jika ada masalah saat pengambilan data
+    });
+}
+
+// Panggil fungsi fetchJadwalKonsultasi saat halaman dimuat
+window.onload = fetchJadwalKonsultasi;
+
+    </script>
+
+
+
+        <!-- form janji temu -->
+>>>>>>> 4c94b20c1b9a4f1712517fde5f6288a8a80cd2da
         <div class="container-fluid pt-5">
             <h4><i class="bi bi-book me-2"></i> Form Janji Temu</h4>
         </div>
@@ -228,6 +321,7 @@
                 console.error("Error submitting form:", error);
             });
         }
+<<<<<<< HEAD
     
         // Event listener untuk form submit
         document.getElementById("janjiTemuForm").addEventListener("submit", submitJanjiTemu);
@@ -244,6 +338,13 @@
 
 
 
+=======
+        // Event listener untuk form submit
+        document.getElementById("janjiTemuForm").addEventListener("submit", submitJanjiTemu);
+    </script>
+    <script src="../login-u/logout.js"></script>
+    <script src="../login-u/user-id-show.js"></script>
+>>>>>>> 4c94b20c1b9a4f1712517fde5f6288a8a80cd2da
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

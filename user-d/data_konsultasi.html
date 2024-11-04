@@ -47,6 +47,7 @@
                         <Span>Jumlah Permintaan SO</Span>
                     </div>    
                 </div>
+                <br>
                 <!-- Dashboard banyak permintaan janji temu -->
                 <div class="container-fluid main text-bg-warning pt-3 pb-2 d-flex flex-column justify-content-start align-items-center shadow">
                     <div class="container d-flex flex-row">
@@ -72,25 +73,6 @@
             <a href="distribusi_khs.html" class="nav-link pt-3 pb-3">Distribusi KHS</a>
             <a href="permintaan_so.html" class="nav-link pt-3 pb-3">Permintaan Stop Out</a>
         </div>
-        <div class="container-fluid" style="font-size: 12px">
-          <hr />
-          <span>MENU</span>
-          <hr />
-        </div>
-        <a href="data_mahasiswa.html" class="nav-link pt-3 pb-3"
-          >Data Mahasiswa</a
-        >
-        <a
-          href="data_konsultasi.html"
-          class="nav-link active pt-3 pb-3 text-light activated"
-          >Data Konsultasi</a
-        >
-        <a href="distribusi_khs.html" class="nav-link pt-3 pb-3"
-          >Distribusi KHS</a
-        >
-        <a href="permintaan_so.html" class="nav-link pt-3 pb-3"
-          >Permintaan Stop Out</a
-        >
       </div>
     </div>
     <!-- Navigation-bar laman -->
@@ -199,8 +181,8 @@
             const row = `<tr>
                             <td>${index + 1}</td>
                             <td>${item.nim}</td>
-                            <td>${item.nama}</td> <!-- Perbaikan di sini -->
-                            <td>${item.abjad_kelas || 'N/A'}</td> <!-- Jika tidak ada data kelas -->
+                            <td>${item.nama}</td>
+                            <td>${item.abjad_kelas || 'N/A'}</td> 
                             <td>${item.semester}</td>
                             <td>${new Date(item.tanggal).toLocaleDateString()}</td>
                             <td>${item.materi}</td>

@@ -215,10 +215,10 @@
                         }
 
                         async function meong(id, nama, nim, rowId, action, materi) {
-    console.log("Row ID yang diterima:", rowId);
+                        console.log("Row ID yang diterima:", rowId);
 
-    const formData = new FormData();
-    formData.append('setujui', id);
+                        const formData = new FormData();
+                        formData.append('setujui', id);
 
     try {
         const response1 = await fetch("https://apiteam.v-project.my.id/api/perwalian/d/janjitemu", {
@@ -236,7 +236,7 @@
 
             console.log("Data persetujuan dikirim, menghapus baris dosen dan menambah data ke mahasiswa");
 
-            document.getElementById(rowId).remove();
+         
 
             // Menggunakan FormData untuk mengirim data ke endpoint mahasiswa
             const mahasiswaFormData = new FormData();
@@ -274,8 +274,6 @@
 }
 
 
-
-
 // Modifikasi fungsi handleApproval
 window.handleApproval = function (id, nama, nim, rowId, action, materi) {
     const confirmationMessage = action === 'approve' ?
@@ -286,12 +284,6 @@ window.handleApproval = function (id, nama, nim, rowId, action, materi) {
         meong(id, nama, nim, rowId, action, materi); // Tambahkan parameter materi
     }
 };
-
-
-
-
-
-
 
             // Menggunakan event listener untuk form pencarian
             document.getElementById('searchForm').addEventListener('submit', function (e) {

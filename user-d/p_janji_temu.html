@@ -205,126 +205,11 @@
       document.addEventListener("DOMContentLoaded", function () {
         const token = localStorage.getItem("token");
 
-<<<<<<< HEAD
-            // Jika token tidak ditemukan, arahkan ke halaman login
-            if (!token) {
-                alert("Anda harus login terlebih dahulu.");
-                window.location.href = "../login-u/login-form.php";
-                return;
-            }
-
-
-                        // Fungsi untuk memuat data janji temu
-                        function loadData(filter = "") {
-                            fetch("https://apiteam.v-project.my.id/api/perwalian/d/janjitemu", {
-                                method: "POST",
-                                headers: {
-                                    'Authorization': `Bearer ${token}`,
-                                    "Content-Type": "application/json",
-                                },
-                            })
-                            .then((response) => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok: ' + response.statusText);
-                                }
-                                return response.json();
-                            })
-                            .then((data) => {
-                                console.log(data); // Logging data untuk debugging
-
-                                if (data.success) {
-                                    const tableBody = document.getElementById("konsultasi-table-body");
-                                    tableBody.innerHTML = ""; // Bersihkan isi tabel
-
-                                    // Menampilkan data janji temu dalam tabel
-                                    data.data.forEach((mahasiswa) => {
-                                        if (mahasiswa.nama.toLowerCase().includes(filter.toLowerCase())) {
-                                            mahasiswa.janji_temu.forEach((janji) => {
-                                                const rowId = janji.id; // ID unik untuk setiap baris
-                                                const row =
-                                                    '<tr id="' + rowId + '">' + // Menambahkan id ke baris
-                                                        '<td>' + mahasiswa.nama + '</td>' +
-                                                        '<td>' + mahasiswa.nim + '</td>' +
-                                                        '<td>' + new Date(janji.tanggal).toLocaleString() + '</td>' +
-                                                        '<td>' + janji.materi + '</td>' +
-                                                        '<td>' +
-                                                            `<button class="btn btn-success" onclick="handleApproval('${janji.id}', '${mahasiswa.nama}', '${mahasiswa.nim}', '${rowId}', 'approve', '${janji.materi}')">Setujui</button>` +
-                                                            `<button class="btn btn-danger" onclick="handleApproval('${janji.id}', '${mahasiswa.nama}', '${mahasiswa.nim}', '${rowId}', 'reject', '${janji.materi}')">Tolak</button>` +
-                                                        '</td>' +
-                                                    '</tr>';
-                                                tableBody.insertAdjacentHTML('beforeend', row);
-                                            });
-                                        }
-                                    });
-                                } else {
-                                    alert(`Gagal memuat data: ${data.message}`);
-                                }
-                            })
-                            .catch((error) => {
-                                console.error('Ada kesalahan:', error);
-                            });
-                        }
-
-                        async function meong(id, nama, nim, rowId, action, materi) {
-                        console.log("Row ID yang diterima:", rowId);
-
-                        const formData = new FormData();
-                        formData.append('setujui', id);
-
-    try {
-        const response1 = await fetch("https://apiteam.v-project.my.id/api/perwalian/d/janjitemu", {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
-            body: formData,
-        });
-
-        const data1 = await response1.json();
-        if (data1.success) {
-            alert('Janji temu berhasil disetujui!');
-
-            console.log("Data persetujuan dikirim, menghapus baris dosen dan menambah data ke mahasiswa");
-
-         
-
-            // Menggunakan FormData untuk mengirim data ke endpoint mahasiswa
-            const mahasiswaFormData = new FormData();
-            mahasiswaFormData.append('nim', nim);
-            mahasiswaFormData.append('nama', nama);
-            mahasiswaFormData.append('janji_temu', JSON.stringify([{
-                tanggal: new Date().toISOString(),
-                materi: materi, // Menggunakan parameter materi
-            }]));
-
-            const response2 = await fetch("https://apiteam.v-project.my.id/api/perwalian/m/janjitemu", {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    // 'Content-Type': 'application/json', // Jangan set Content-Type saat menggunakan FormData
-                },
-                body: mahasiswaFormData,
-            });
-
-            const data2 = await response2.json();
-
-            console.log("Respons dari endpoint mahasiswa:", data2);
-
-            if (data2.success) {
-                alert('Data berhasil ditambahkan ke tabel mahasiswa!');
-            } else {
-                alert(`Gagal menambah data ke tabel mahasiswa: ${data2.message}`);
-            }
-        } else {
-            alert(`Gagal menyetujui janji temu: ${data1.message}`);
-=======
         // Jika token tidak ditemukan, arahkan ke halaman login
         if (!token) {
           alert("Anda harus login terlebih dahulu.");
           window.location.href = "../login-u/login-form.php";
           return;
->>>>>>> 4c94b20c1b9a4f1712517fde5f6288a8a80cd2da
         }
 
         // Fungsi untuk memuat data janji temu
@@ -347,24 +232,6 @@
             .then((data) => {
               console.log(data); // Logging data untuk debugging
 
-<<<<<<< HEAD
-// Modifikasi fungsi handleApproval
-window.handleApproval = function (id, nama, nim, rowId, action, materi) {
-    const confirmationMessage = action === 'approve' ?
-        `Apakah Anda yakin ingin menyetujui janji temu ${nama} (NIM: ${nim})?` :
-        `Apakah Anda yakin ingin menolak janji temu ${nama} (NIM: ${nim})?`;
-
-    if (confirm(confirmationMessage)) {
-        meong(id, nama, nim, rowId, action, materi); // Tambahkan parameter materi
-    }
-};
-
-            // Menggunakan event listener untuk form pencarian
-            document.getElementById('searchForm').addEventListener('submit', function (e) {
-                e.preventDefault(); // Mencegah pengiriman form default
-                const searchValue = document.getElementById('cari').value;
-                loadData(searchValue); // Memuat data dengan filter pencarian
-=======
               if (data.success) {
                 const tableBody = document.getElementById(
                   "konsultasi-table-body"
@@ -409,7 +276,6 @@ window.handleApproval = function (id, nama, nim, rowId, action, materi) {
             })
             .catch((error) => {
               console.error("Ada kesalahan:", error);
->>>>>>> 4c94b20c1b9a4f1712517fde5f6288a8a80cd2da
             });
         }
 

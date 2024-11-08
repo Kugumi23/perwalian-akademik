@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.css">
-    <title>BSPAM Online : Data Konsultasi</title>
+    <title>BSPAM Online : Data Konsultasi & Janji Temu</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/jt.css">
     <link rel="stylesheet" href="../vendor/twbs/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
-            background-image:url('picture/bg_main.jpg');
+            background-image: url('picture/bg_main.jpg');
         }
     </style>
 </head>
@@ -21,14 +21,13 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body sides">
-            <a href="beranda.html" class="nav-link pt-3 pb-3">Beranda</a> 
+            <a href="beranda.html" class="nav-link pt-3 pb-3">Beranda</a>
             <a href="#" class="nav-link active pt-3 pb-3 text-light activated">Data Konsultasi & Janji Temu</a>
             <a href="cetak_khs.html" class="nav-link pt-3 pb-3">Cetak KHS</a>
             <a href="rekomendasi.html" class="nav-link pt-3 pb-3">Rekomendasi</a>
         </div>
     </div>
     <div class="container-fluid" style="margin-bottom:70px;">    
-        <!-- Navigation-bar laman -->
         <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
             <div class="container-fluid">
                 <ul class="navbar-nav">
@@ -57,100 +56,113 @@
             </div>
         </nav>
     </div>
-    <!-- Batas navigation-bar -->
+    
     <div class="container-fluid pt-5 jt-body">
-        <h4 class="ps-3">Jadwal Konsultasi Mahasiswa</h4>
+        <h4 class="ps-3">Jadwal Konsultasi dan Janji Temu</h4>
         <div class="container-fluid pt-4">
             <p class="text-warning">Perhatian: Anda dapat mengajukan janji temu yang nantinya akan ditampilkan di dalam <b>Jadwal Konsultasi Mahasiswa</b>. Proses ini melibatkan mahasiswa dan dosen pembimbing, dan tidak semua janji temu akan masuk ke tabel jadwal jika tidak disetujui oleh dosen pembimbing.</p>
+            
+            <!-- Tabel gabungan untuk Konsultasi dan Janji Temu -->
+            <h5>Data Konsultasi & Janji Temu</h5>
             <table class="table table-striped">
                 <thead>
                     <tr class="table-danger">
                         <th>Nama</th>
                         <th>NIM</th>
-                        <th>Tanggal/waktu bimbingan</th>
+                        <th>Tanggal</th>
                         <th>Materi</th>
                     </tr>
                 </thead>
-                <tbody id="jadwalKonsultasiBody">
-                <!-- Data akan ditambahkan di sini -->
+                <tbody id="jadwalGabunganBody">
+                    <!-- Data konsultasi dan janji temu akan dimasukkan di sini -->
                 </tbody>
             </table>
         </div>
     </div>
 
-<script>
+    <script>
+        // Ambil token dari localStorage
+        var token = localStorage.getItem('token'); 
 
-    // Fungsi untuk mengambil data janji temu dari API
-    function fetchJadwalKonsultasi() {
-    // Ambil token dari localStorage
-    var token = localStorage.getItem('token'); 
-    console.log("Token yang digunakan:", token); // Log token yang digunakan
-
-    // Pastikan token ada
-    if (!token) {
-        alert("Anda harus login terlebih dahulu.");
-        window.location.href = "../login.php";
-        return; // Keluar dari fungsi jika tidak ada token
-    }
-
-    // Ambil data janji temu dari API
-    fetch("https://apiteam.v-project.my.id/api/perwalian/m/janjitemu", {
-        method: "GET",
-        headers: {
-            "Authorization": "Bearer " + token // Otorisasi menggunakan token
+        // Jika token tidak ada, arahkan ke halaman login
+        if (!token) {
+            alert("Anda harus login terlebih dahulu.");
+            window.location.href = "../login.php";
         }
-    })
-    .then(response => {
-        // Periksa apakah respon dari server ok
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
+
+        // Fungsi untuk mengambil data konsultasi dan janji temu dari API
+        function fetchDataGabungan() {
+            const timestamp = new Date().getTime(); // Bypass cache with timestamp
+            const tbody = document.getElementById('jadwalGabunganBody');
+            tbody.innerHTML = '<tr><td colspan="4">Loading...</td></tr>'; // Display loading indicator
+            
+            fetch("https://apiteam.v-project.my.id/api/perwalian/m/janjitemu?timestamp=" + timestamp, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token 
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Fetched data:', data); // Debug log for fetched data
+                tbody.innerHTML = ""; // Clear previous data
+
+                if (data.success && Array.isArray(data.data)) {
+                    if (data.data.length > 0) {
+                        data.data.forEach(item => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${item.nama}</td>
+                                <td>${item.nim}</td>
+                                <td>${item.tanggal}</td>
+                                <td>${item.materi}</td>
+                            `;
+                            tbody.appendChild(row);
+                        });
+                    } else {
+                        tbody.innerHTML = '<tr><td colspan="4">Tidak ada data konsultasi atau janji temu yang tersedia</td></tr>';
+                    }
+                } else {
+                    alert("Gagal mengambil data konsultasi dan janji temu.");
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching data gabungan:", error);
+                tbody.innerHTML = '<tr><td colspan="4">Terjadi kesalahan saat mengambil data</td></tr>';
+            });
         }
-        return response.json(); // Konversi respons ke JSON
-    })
-    .then(data => {
-        console.log('Parsed Data:', data); // Log seluruh data yang diterima dari API
+
+        // Fungsi untuk menambahkan entri baru dan memperbarui tabel
+        function addNewEntry(entryData) {
+            fetch("https://apiteam.v-project.my.id/api/perwalian/m/janjitemu", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer " + token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(entryData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Entry added:', data);
+                fetchDataGabungan(); // Reload data after adding new entry
+            })
+            .catch(error => {
+                console.error("Error adding entry:", error);
+            });
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        window.onload = function() {
+            fetchDataGabungan();
+        };
+    </script>
 
         if (data.success) {
             const tbody = document.getElementById('jadwalKonsultasiBody');
             tbody.innerHTML = ""; // Kosongkan tabel sebelum diisi
 
-            // Mengambil data mahasiswa
-            const mhs = data.data;
-            console.log('Data Mahasiswa:', mhs); // Log data mahasiswa
-
-            if (mhs.janji_temu && Array.isArray(mhs.janji_temu)) {
-                mhs.janji_temu.forEach(janji => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${mhs.nama}</td>
-                        <td>${mhs.nim}</td>
-                        <td>${janji.tanggal}</td>
-                        <td>${janji.materi ? janji.materi : 'Tidak ada materi'}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
-            } else {
-                const row = document.createElement('tr');
-                row.innerHTML = `<td colspan="4">Tidak ada janji temu yang tersedia</td>`;
-                tbody.appendChild(row);
-            }
-        } else {
-            alert("Gagal mengambil data janji temu.");
-        }
-    })
-    .catch(error => {
-        console.error("Error fetching data:", error); // Log error jika ada masalah saat pengambilan data
-    });
-}
-
-// Panggil fungsi fetchJadwalKonsultasi saat halaman dimuat
-window.onload = fetchJadwalKonsultasi;
-
-    </script>
-
-
-
-        <!-- form janji temu -->
+                <!-- form janji temu -->
         <div class="container-fluid pt-5">
             <h4><i class="bi bi-book me-2"></i> Form Janji Temu</h4>
         </div>
@@ -176,27 +188,27 @@ window.onload = fetchJadwalKonsultasi;
     <script>
         // Periksa apakah token ada di localStorage atau sessionStorage
         var token = localStorage.getItem('token'); // Atau sessionStorage jika diperlukan
-
+    
         // Jika token tidak ditemukan, arahkan ke halaman login
         if (!token) {
             alert("Anda harus login terlebih dahulu.");
             window.location.href = "../login.php";
         }
-
+    
         // Fungsi untuk submit janji temu
         function submitJanjiTemu(event) {
             event.preventDefault();  // Mencegah refresh halaman
-
+    
             // Ambil data dari form
             const tanggal = document.getElementById("datetime").value;
             const materi = document.getElementsByName("materi")[0].value;
-
+    
             // Siapkan data untuk dikirim ke API
             const data = {
                 tanggal: tanggal,
                 materi: materi
             };
-
+    
             // Kirim data ke API
             fetch("https://apiteam.v-project.my.id/api/perwalian/m/janjitemu/tambah", {
                 method: "POST",
@@ -210,6 +222,7 @@ window.onload = fetchJadwalKonsultasi;
             .then(data => {
                 if (data.success) {
                     alert("Janji temu berhasil disimpan.");
+                    document.getElementById("janjiTemuForm").reset(); // Clear form only after successful save
                 } else {
                     alert("Gagal menyimpan janji temu.");
                     console.error("Error response:", data.errors);
@@ -219,11 +232,22 @@ window.onload = fetchJadwalKonsultasi;
                 console.error("Error submitting form:", error);
             });
         }
+    
         // Event listener untuk form submit
         document.getElementById("janjiTemuForm").addEventListener("submit", submitJanjiTemu);
     </script>
+    
     <script src="../login-u/logout.js"></script>
     <script src="../login-u/user-id-show.js"></script>
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
+
     <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
